@@ -242,7 +242,7 @@ window.PROGRAMS = [
         items: [
           { label: 'Séance 1 · endurance', text: '35 min en Z2, allure conversation.' },
           { label: 'Séance 2 · fractionné', text: '15 min d’échauffement · 6 × [400 m rapides / 200 m trot] · 10 min de retour au calme.' },
-          { label: 'Séance 3 · sortie longue', text: '45 min en Z2, terrain plat.' }
+          { label: 'Séance 3 · sortie longue', text: '35 min en Z2, terrain plat. C’est à peine plus que les 30 min du prérequis : on part de ce que tu tiens déjà.' }
         ]
       },
       {
@@ -253,7 +253,7 @@ window.PROGRAMS = [
         items: [
           { label: 'Séance 1 · endurance', text: '40 min en Z2.' },
           { label: 'Séance 2 · fractionné', text: '15 min d’échauffement · 8 × [400 m / 200 m trot] · 10 min de retour au calme.' },
-          { label: 'Séance 3 · sortie longue', text: '50 min en Z2, quelques faux plats.' }
+          { label: 'Séance 3 · sortie longue', text: '42 min en Z2, quelques faux plats.' }
         ]
       },
       {
@@ -264,7 +264,7 @@ window.PROGRAMS = [
         items: [
           { label: 'Séance 1 · endurance', text: '40 min en Z2.' },
           { label: 'Séance 2 · fractionné', text: '15 min d’échauffement · 5 × [800 m à allure 5 km / 2 min de trot] · 10 min de retour au calme.' },
-          { label: 'Séance 3 · sortie longue', text: '55 min en Z2, dont 3 × 3 min à allure 5 km en milieu de sortie.' }
+          { label: 'Séance 3 · sortie longue', text: '50 min en Z2, dont 3 × 3 min à allure 5 km en milieu de sortie.' }
         ]
       },
       {
@@ -301,7 +301,7 @@ window.PROGRAMS = [
         items: [
           { label: 'Séance 1 · endurance', text: '45 min en Z2.' },
           { label: 'Séance 2 · seuil', text: '15 min d’échauffement · 2 × [8 min à allure 10 km / 3 min de trot] · 10 min de retour au calme.' },
-          { label: 'Séance 3 · sortie longue', text: '60 min en Z2.' },
+          { label: 'Séance 3 · sortie longue', text: '50 min en Z2 — cinq minutes de plus que ce que tu tiens déjà, pas davantage.' },
           { label: 'Séance 4 (option)', text: '30 min en Z2 très facile, ou 45 min de vélo.' }
         ]
       },
@@ -313,7 +313,7 @@ window.PROGRAMS = [
         items: [
           { label: 'Séance 1 · endurance', text: '50 min en Z2.' },
           { label: 'Séance 2 · seuil', text: '15 min d’échauffement · 3 × [8 min à allure 10 km / 3 min de trot] · 10 min de retour au calme.' },
-          { label: 'Séance 3 · sortie longue', text: '70 min en Z2, terrain vallonné en marchant les raidillons.' }
+          { label: 'Séance 3 · sortie longue', text: '60 min en Z2, terrain vallonné en marchant les raidillons.' }
         ]
       },
       {
@@ -324,7 +324,7 @@ window.PROGRAMS = [
         items: [
           { label: 'Séance 1 · endurance', text: '50 min en Z2.' },
           { label: 'Séance 2 · VMA', text: '15 min d’échauffement · 8 × [400 m vite / 1 min 30 de trot] · 10 min de retour au calme.' },
-          { label: 'Séance 3 · sortie longue', text: '75 min en Z2.' },
+          { label: 'Séance 3 · sortie longue', text: '70 min en Z2.' },
           { label: 'Séance 4 (option)', text: '30 min très facile, jambes lourdes autorisées.' }
         ]
       },
@@ -356,6 +356,7 @@ window.PROGRAMS = [
       'Allure seuil = celle que tu tiendrais environ une heure en course : difficile mais régulière, pas asphyxiante.',
       'Jamais deux séances dures d’affilée. La 4e séance optionnelle est toujours facile, sinon elle ne sert à rien.',
       'Volume hebdomadaire : +10 % maximum d’une semaine à l’autre.',
+      'Semaine 6 allégée : volume −30 %, on garde la séance de seuil mais réduite de moitié.',
       'Fatigue persistante après trois nuits de sommeil correctes : sauter la séance de seuil de la semaine, garder les faciles.'
     ]
   },
@@ -418,7 +419,7 @@ window.PROGRAMS = [
         items: [
           { label: 'Séances faciles (×2)', text: '45 min et 55 min en Z2.' },
           { label: 'Séance de seuil', text: '15 min d’échauffement · 5 × [6 min à allure 10 km / 2 min de trot] · 10 min de retour au calme.' },
-          { label: 'Sortie longue', text: '1 h 45 en Z2, avec ravitaillement testé (boisson et gel).' }
+          { label: 'Sortie longue', text: '1 h 45 en Z2 la semaine 9, avec ravitaillement testé (boisson et gel). Semaine 10 : 1 h 15, tout allégé — l’affûtage commence là.' }
         ]
       },
       {
@@ -499,7 +500,7 @@ window.PROGRAMS = [
         items: [
           { label: 'Séances faciles (×3)', text: '50 min, 55 min, 40 min en Z2.' },
           { label: 'Séance spécifique', text: '15 min d’échauffement · 3 × [5 km à allure marathon / 4 min de trot] · 10 min de retour au calme.' },
-          { label: 'Sortie longue', text: '2 h 30 ou 28 km en Z2, ravitaillement complet testé.' }
+          { label: 'Sortie longue', text: '2 h 30 ou 28 km en Z2 la semaine 9, ravitaillement complet testé. Semaine 10 : 1 h 30, tout allégé avant le point haut.' }
         ]
       },
       {
@@ -580,7 +581,7 @@ window.PROGRAMS = [
         detail: 'Échauffement : vélo 5 min + abductions élastique 2×15. Goblet squat 3×10 · Fentes arrière 3×8/jambe (légères, amplitude sans douleur au genou) · Soulevé de terre roumain haltères 3×10 · Mollets debout 3×15 · Farmer walk 3×30 m · Suspension active 3× max.',
         targets: [
           { ex: 'Goblet squat 3×10', lui: '24-28 kg', elle: '14-18 kg' },
-          { ex: 'SDT roumain haltères 3×10', lui: '2×18-22 kg', elle: '2×10-14 kg' },
+          { ex: 'Soulevé de terre roumain haltères 3×10', lui: '2×18-22 kg', elle: '2×10-14 kg' },
           { ex: 'Farmer walk 30 m', lui: '2×22-26 kg', elle: '2×14-18 kg' },
           { ex: 'Suspension active', lui: '3×30 s', elle: '3×25 s' }
         ]
@@ -637,7 +638,7 @@ window.PROGRAMS = [
         detail: 'Squat ou presse 4×8 · Soulevé de terre roumain 3×8 · Fentes arrière ou split squat 3×8/jambe · Dead hang 4× max (viser 2 min cumulées) · Farmer walk lourd 4×30 m · Mollets 3×15.',
         targets: [
           { ex: 'Squat ou presse 4×8', lui: '70-85 kg', elle: '40-50 kg' },
-          { ex: 'SDT roumain 3×8', lui: '60-70 kg', elle: '35-45 kg' },
+          { ex: 'Soulevé de terre roumain 3×8', lui: '60-70 kg', elle: '35-45 kg' },
           { ex: 'Dead hang — objectif fin de phase', lui: '75 s', elle: '60 s' },
           { ex: 'Farmer walk lourd 30 m', lui: '2×30-34 kg', elle: '2×20-24 kg' }
         ]
@@ -677,7 +678,7 @@ window.PROGRAMS = [
         title: 'Muscu A — force',
         detail: 'Tractions strictes 5×3-5 (lestées si 10+) · Développé couché 5×5 · Développé militaire 4×6 · Rowing Pendlay 4×6 · Gainage lesté 3×45 s.',
         targets: [
-          { ex: 'Tractions strictes 5×3-5', lui: 'lestées +5 kg', elle: 'poids de corps' },
+          { ex: 'Tractions strictes 5 séries', lui: '3-5 reps, lestées +5 kg', elle: '2-3 reps, élastique léger si besoin' },
           { ex: 'Tractions — objectif fin de phase', lui: '12', elle: '7' },
           { ex: 'Développé couché 5×5', lui: '70-80 kg', elle: '35-42 kg' },
           { ex: 'Rowing Pendlay 4×6', lui: '55-65 kg', elle: '32-38 kg' }
@@ -706,7 +707,7 @@ window.PROGRAMS = [
         detail: 'Squat ou presse 4×6 · Soulevé de terre roumain 3×8 · Tirage vertical prise large 4×8 · Suspensions 5× max · Farmer walk lourd 4×40 m · Mollets 3×15.',
         targets: [
           { ex: 'Squat ou presse 4×6', lui: '85-100 kg', elle: '50-60 kg' },
-          { ex: 'SDT roumain 3×8', lui: '70-80 kg', elle: '40-50 kg' },
+          { ex: 'Soulevé de terre roumain 3×8', lui: '70-80 kg', elle: '40-50 kg' },
           { ex: 'Tirage vertical prise large 4×8', lui: '60-70 kg', elle: '35-42 kg' },
           { ex: 'Farmer walk lourd 40 m', lui: '2×34-38 kg', elle: '2×22-26 kg' },
           { ex: 'Suspensions', lui: '5×45 s', elle: '5×40 s' }
@@ -774,7 +775,7 @@ window.PROGRAMS = [
         detail: 'Step-up lesté sur box 3×8/jambe · Porté de sac lesté 4×50 m · Farmer walk lourd 4×40 m · Suspension bras fatigués 4×30 s (jusqu’à 45 s si possible) · Gainage 3×45 s.',
         targets: [
           { ex: 'Step-up lesté 3×8/jambe', lui: '2×16-20 kg', elle: '2×8-12 kg' },
-          { ex: 'Porté de sac lesté 50 m', lui: '18-22 kg', elle: '10-14 kg' },
+          { ex: 'Porté de sac 50 m (sac de course ≈ 27/18 kg)', lui: '20-25 kg', elle: '12-16 kg' },
           { ex: 'Farmer walk lourd 40 m', lui: '2×36-40 kg', elle: '2×24-28 kg' },
           { ex: 'Suspension bras fatigués', lui: '4×45 s', elle: '4×40 s' }
         ]
@@ -794,7 +795,9 @@ window.PROGRAMS = [
     ],
     rules: [
       'Deload : 1 semaine sur 4 — la phase la plus lourde, ne pas sauter le deload.',
+      'Sauts sur box : on descend en marchant, jamais en sautant. La réception en contrebas est ce qui casse les genoux, et le genou droit (lui) est déjà sensible. Box trop haute = step-up.',
       'Glucides +10 % les jours de grosse séance (sortie longue, circuit hybride, ≥ 75 min).',
+      'Lundi circuit puis mardi côtes = deux séances dures d’affilée. Si les temps de côtes se dégradent semaine après semaine, échanger mardi et mercredi : footing le mardi, côtes le mercredi.',
       'Jalon 2027-06-13 : acheter les chaussures de trail et les tester en sortie longue.',
       'Jalon 2027-07-25 : Spartan Sprint test ou course à obstacles de préparation.',
       'Tests fin de phase (2027-09-12) : 5 km en 25:00 / 30:00 · tractions · bilan.'
@@ -867,7 +870,7 @@ window.PROGRAMS = [
           { name: 'Pompes (ou inclinées sur table)', sets: '4', reps: '8 à 15', rest: '1’30 à 2’' },
           { name: 'Squats (ou bulgares sur chaise)', sets: '4', reps: '12 à 20', rest: '1’30 à 2’' },
           { name: 'Dips sur chaise', sets: '3', reps: '8 à 15', rest: '1’30' },
-          { name: 'Fentes arrière', sets: '3', reps: '10 à 15 /jambe', rest: '1’30' },
+          { name: 'Fentes arrière', sets: '3', reps: '10 à 12 /jambe', rest: '1’30' },
           { name: 'Gainage planche', sets: '3', reps: '30 à 60 s', rest: '1’' },
           { name: 'Hollow hold', sets: '3', reps: '20 à 40 s', rest: '1’' }
         ]
@@ -881,7 +884,7 @@ window.PROGRAMS = [
           { name: 'Tractions australiennes (sous une table)', sets: '4', reps: '8 à 15', rest: '1’30 à 2’' },
           { name: 'Tractions négatives (descente 5 s)', sets: '3', reps: '3 à 6', rest: '2’' },
           { name: 'Pont fessier une jambe', sets: '3', reps: '10 à 15 /jambe', rest: '1’30' },
-          { name: 'Good morning sans charge', sets: '3', reps: '15 à 20', rest: '1’30' },
+          { name: 'Nordic curl assisté (ou good morning, sac à dos lesté)', sets: '3', reps: '5 à 10', rest: '2’' },
           { name: 'Mollets sur une marche', sets: '3', reps: '15 à 25', rest: '1’' },
           { name: 'Gainage latéral', sets: '3', reps: '30 à 45 s /côté', rest: '1’' }
         ]
@@ -899,7 +902,7 @@ window.PROGRAMS = [
     group: 'Autres sports',
     name: 'Hybride force + cardio',
     meta: '4 séances/sem · style HYROX',
-    focus: 'Courir vite avec des jambes fatiguées et porter lourd avec un cardio saturé : c’est une qualité à part, qui ne s’obtient ni en salle de muscu seule, ni en courant seul. Le plan alterne une séance lourde, une de course, un circuit, une longue.',
+    focus: 'Courir vite avec des jambes fatiguées et porter lourd avec un cardio saturé : c’est une qualité à part, qui ne s’obtient ni en salle de muscu seule, ni en courant seul. Le plan alterne une séance lourde, une de course, un circuit, une longue. Le format de référence est celui d’HYROX : 8 × [1 km de course + une station], dans l’ordre SkiErg, sled push, sled pull, burpees saut en longueur, rameur, farmer walk, fentes sandbag, wall balls.',
     sessions: [
       {
         day: 'séance 1',
@@ -921,21 +924,21 @@ window.PROGRAMS = [
         detail: 'L’allure cible est celle que tu tiendrais sur 10 km, pas un sprint.',
         items: [
           { label: 'Échauffement', text: '15 min progressives + 4 lignes droites de 20 s.' },
-          { label: 'Corps de séance', text: '4 × [1 km à allure 10 km / 90 s de marche]. Monter à 5 × 1 km quand les temps restent stables.' },
+          { label: 'Corps de séance', text: '4 × [1 km à allure 10 km / 90 s de marche]. Ajouter un kilomètre quand les temps restent stables du premier au dernier — la cible est 8 × 1 km, le volume de course d’une épreuve.' },
           { label: 'Retour au calme', text: '10 min de trot très facile.' }
         ]
       },
       {
         day: 'séance 3',
         type: 'circuit hybride',
-        title: 'Circuit — course + stations',
-        detail: '4 à 5 tours, 2 min de récupération entre les tours. Chronométrer chaque tour : l’écart entre le premier et le dernier est l’indicateur à faire baisser.',
+        title: 'Circuit — stations de course',
+        detail: 'Quatre blocs [1 km de course + une station], enchaînés sans pause, comme en course. Les charges ci-dessous sont celles de la catégorie open (homme / femme) : commencer à la moitié et monter quand les temps de course tiennent.',
         exercises: [
-          { name: 'Course ou rameur', sets: '1 /tour', reps: '500 m', rest: 'enchaîné' },
-          { name: 'Wall balls ou thrusters', sets: '1 /tour', reps: '15', rest: 'enchaîné' },
-          { name: 'Farmer walk', sets: '1 /tour', reps: '50 m', rest: 'enchaîné' },
-          { name: 'Burpees', sets: '1 /tour', reps: '10', rest: 'enchaîné' },
-          { name: 'Fentes lestées', sets: '1 /tour', reps: '20 pas', rest: '2’ fin de tour' }
+          { name: '1 km course → SkiErg ou rameur 1000 m', sets: 'bloc 1', reps: '1 km + 1000 m', rest: 'enchaîné' },
+          { name: '1 km course → sled push 50 m (152/102 kg chargé)', sets: 'bloc 2', reps: '1 km + 50 m', rest: 'enchaîné' },
+          { name: '1 km course → burpees saut en longueur 80 m', sets: 'bloc 3', reps: '1 km + 80 m', rest: 'enchaîné' },
+          { name: '1 km course → farmer walk 200 m (2×24 / 2×16 kg)', sets: 'bloc 4', reps: '1 km + 200 m', rest: 'enchaîné' },
+          { name: 'Finish — wall balls (6/4 kg, cible 3 m / 2,70 m)', sets: '1', reps: '50 à 100', rest: 'fin de séance' }
         ]
       },
       {
@@ -945,7 +948,7 @@ window.PROGRAMS = [
         detail: 'La séance qui construit le fond. Terrain vallonné si possible.',
         items: [
           { label: 'Course', text: '60 à 80 min en Z2, allure conversation.' },
-          { label: 'Portés en fin de sortie', text: '4 × 100 m de sac lesté ou sled push, récupération 2 min. Sur jambes fatiguées, c’est le but.' },
+          { label: 'Portés en fin de sortie', text: 'Fentes avec sandbag 4 × 25 m (20/10 kg) ou sled push 4 × 50 m, récupération 2 min. Sur jambes fatiguées, c’est le but.' },
           { label: 'Étirements', text: '10 min : mollets, fléchisseurs de hanche, ischios.' }
         ]
       }
@@ -972,7 +975,7 @@ window.PROGRAMS = [
         items: [
           { label: 'Échauffement · 10 min', text: 'Rameur ou corde à sauter 3 min · mobilité épaules et hanches · 2 séries à vide du mouvement du jour.' },
           { label: 'Force · 20 min', text: 'Back squat 5 × 5, en montant à 80 % du max. Repos 2 à 3 min entre les séries.' },
-          { label: 'WOD · 8 à 12 min', text: '« Fran » scalée : 21-15-9 thrusters (40/30 kg) et tractions. Version débutant : 15-12-9, thrusters à vide ou barre légère, tractions australiennes.' },
+          { label: 'WOD · 3 à 12 min', text: '« Fran » : 21-15-9 thrusters et tractions, pour le temps. Rx = 43 kg (homme) / 30 kg (femme). Version débutant : 15-12-9, barre à vide ou 20 kg, tractions australiennes.' },
           { label: 'Accessoires · 8 min', text: 'Gainage 3 × 45 s · face pulls 3 × 15.' }
         ]
       },
@@ -984,7 +987,7 @@ window.PROGRAMS = [
         items: [
           { label: 'Échauffement · 10 min', text: 'Corde à sauter 3 min · rotations d’épaules · 3 × 5 tractions australiennes.' },
           { label: 'Skill · 15 min', text: 'Travail de traction stricte ou de handstand contre un mur, par séries courtes et non fatigantes.' },
-          { label: 'WOD · 20 min', text: '« Cindy » : AMRAP 20 min de [5 tractions · 10 pompes · 15 squats]. Scaler les tractions en australiennes, les pompes sur les genoux.' },
+          { label: 'WOD · 20 min', text: '« Cindy » : AMRAP 20 min de [5 tractions · 10 pompes · 15 squats au poids de corps]. Aucune charge prescrite. Scaler les tractions en australiennes, les pompes sur les genoux. Un tour toutes les 80 à 90 s est un bon rythme de départ.' },
           { label: 'Accessoires · 8 min', text: 'Hollow hold 3 × 30 s · extensions dos 3 × 12.' }
         ]
       },
@@ -1007,7 +1010,7 @@ window.PROGRAMS = [
         detail: 'Séance longue, charges légères, rythme régulier. L’erreur classique est de partir trop vite dans les cinq premières minutes.',
         items: [
           { label: 'Échauffement · 12 min', text: 'Course 800 m facile · mobilité complète · 2 tours légers du circuit.' },
-          { label: 'WOD · 25 à 35 min', text: '« Helen » × 3 tours : 400 m de course · 21 kettlebell swings · 12 tractions. Ou, en version longue : 5 tours de [500 m rameur · 20 wall balls · 15 burpees].' },
+          { label: 'WOD · 25 à 35 min', text: '« Helen » : 3 tours de [400 m de course · 21 kettlebell swings (Rx 24/16 kg) · 12 tractions], pour le temps. Version longue : 5 tours de [500 m rameur · 20 wall balls · 15 burpees].' },
           { label: 'Retour au calme · 10 min', text: 'Marche 5 min + étirements mollets, quadriceps, épaules.' }
         ]
       }
