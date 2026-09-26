@@ -1,8 +1,11 @@
 # How2Train
 
-Les programmes d'entraînement à suivre, phase par phase. Rien d'autre : pas de
-suivi, pas de charges, pas de stats, pas de calendrier. On sélectionne un
-training, on lit les séances de la semaine type.
+Les programmes d'entraînement à suivre. Rien d'autre : pas de suivi, pas de
+stats, pas de calendrier. On choisit un training sur l'accueil, on lit ses
+séances.
+
+Trois sections : **Musculation** (full body, upper/lower, push-pull-legs),
+**Prépa Spartan 2027** (les 5 phases) et **Annexes** (mobilité, reprise).
 
 ## Ouvrir
 
@@ -26,15 +29,18 @@ Tout se passe dans `data.js`. Copier un bloc, changer l'`id` :
 ```js
 {
   id: 'mon-bloc',                       // unique, sert aussi d'URL (?p=mon-bloc)
-  group: 'Hors-Spartan',                // titre de section dans le catalogue
+  group: 'Musculation',                 // titre de section sur l'accueil
   name: 'Nom affiché',
   meta: '6 semaines · 3 séances/sem',   // ligne grise sous le nom
   start: '2027-01-01',                  // optionnel : ISO AAAA-MM-JJ
   end: '2027-02-15',                    // les deux ou aucun des deux
   focus: 'À quoi sert ce bloc, en deux phrases.',
   sessions: [
-    { day: 'lundi', type: 'muscu A', title: 'Titre de la séance',
+    { day: 'lundi', type: 'push', title: 'Titre de la séance',
       detail: 'Le contenu détaillé, visible au tap sur la carte.',
+      exercises: [                        // optionnel : liste d'exercices
+        { name: 'Squat', sets: '3 à 4', reps: '8 à 15', rest: '2’30 à 3’' }
+      ],
       targets: [                          // optionnel : repères Lui / Elle
         { ex: 'Squat 4×8', lui: '70-85 kg', elle: '40-50 kg' }
       ] }
@@ -45,8 +51,10 @@ Tout se passe dans `data.js`. Copier un bloc, changer l'`id` :
 
 Deux détails :
 
-- `start`/`end` servent au badge **en cours** du catalogue. Un programme sans
-  dates n'est jamais marqué en cours — c'est voulu pour les blocs hors-Spartan.
+- `start`/`end` sont optionnels : quand ils sont là, la période s'affiche à côté
+  de `meta`. Les programmes de musculation n'en ont pas.
+- `exercises` affiche la liste des mouvements avec séries × répétitions et
+  temps de repos. « 3 à 4 » est raccourci en « 3-4 » à l'écran.
 - `targets` affiche un petit tableau Lui / Elle sous le détail : charges, temps
   ou objectifs de fin de phase, uniquement là où les deux diffèrent. Les
   valeurs sont des points de départ à calibrer (2 reps en réserve).
@@ -59,6 +67,7 @@ contiguës, couleurs existantes).
 
 ## Source du contenu
 
-Les 5 phases Spartan viennent de
-`SpartanTrack v2/docs/plan-spartan-2027.md`. Les trois blocs hors-Spartan
-(entretien, mobilité, reprise) sont propres à ce site.
+- **Musculation** : PDF « Programmes Gratuits » de Lucas Gouiffes, recopié tel
+  quel (séries, répétitions, repos, variantes de séance).
+- **Prépa Spartan 2027** : `SpartanTrack v2/docs/plan-spartan-2027.md`.
+- **Annexes** : mobilité et reprise, écrites pour ce site.

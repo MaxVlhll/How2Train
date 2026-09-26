@@ -3,9 +3,174 @@
 // Pour ajouter un programme : copier un bloc, changer l'id. Voir README.md.
 
 window.PROGRAMS = [
+  // Musculation — programmes de Lucas Gouiffes (PDF « Programmes Gratuits »).
+  // Fourchette de répétitions large pour simplifier la progression : une fois la
+  // technique maîtrisée, on augmente charges et répétitions au fil des séances.
+  {
+    id: 'full-body',
+    group: 'Musculation',
+    name: 'Full body',
+    meta: '3 séances/sem ou moins · 2 séances qui alternent',
+    focus: 'Composé majoritairement de mouvements de base, accessible à tous les niveaux. Adapté à une fréquence de une à trois séances par semaine. On alterne séance 1 et séance 2.',
+    sessions: [
+      {
+        day: 'séance 1',
+        type: 'full body',
+        title: 'Full body — variante 1',
+        detail: 'Six mouvements, du plus lourd au plus léger. Augmenter charges ou répétitions d’une séance à l’autre.',
+        exercises: [
+          { name: 'Squat', sets: '4', reps: '8 à 15', rest: '2’30 à 3’' },
+          { name: 'Développé couché', sets: '4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Tirage horizontal', sets: '4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Legs curl', sets: '4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Élévation latérale', sets: '3 à 5', reps: '8 à 15', rest: '1’30 à 2’' },
+          { name: 'Crunch à la poulie', sets: '3 à 5', reps: '8 à 15', rest: '1’ à 1’30' }
+        ]
+      },
+      {
+        day: 'séance 2',
+        type: 'full body',
+        title: 'Full body — variante 2',
+        detail: 'Même structure, mouvements alternés. À faire en alternance avec la variante 1.',
+        exercises: [
+          { name: 'Hack squat', sets: '4', reps: '8 à 15', rest: '2’30 à 3’' },
+          { name: 'Développé incliné', sets: '4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Tirage vertical', sets: '4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Extension mollets', sets: '4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Tirage menton', sets: '3 à 5', reps: '8 à 15', rest: '1’30 à 2’' },
+          { name: 'Enroulement de bassin', sets: '3 à 5', reps: '8 à 15', rest: '1’ à 1’30' }
+        ]
+      }
+    ],
+    rules: [
+      'La fourchette de répétitions est large pour simplifier la progression : viser le haut de la fourchette, puis monter la charge.',
+      'Une fois la technique parfaitement maîtrisée, chercher à augmenter charges et répétitions sur tous les exercices au fil des séances.',
+      'Le meilleur programme est celui qui donne envie d’aller s’entraîner — les mouvements se substituent selon les préférences.'
+    ]
+  },
+  {
+    id: 'upper-lower',
+    group: 'Musculation',
+    name: 'Upper / Lower',
+    meta: '4 séances/sem · haut et bas en alternance',
+    focus: 'Mélange de mouvements polyarticulaires et d’isolation, adapté à tous les niveaux et particulièrement à quatre entraînements par semaine. Deux hauts et deux bas, en variantes 1 et 2.',
+    sessions: [
+      {
+        day: 'upper 1',
+        type: 'upper',
+        title: 'Haut du corps — variante 1',
+        detail: 'Poussée horizontale, tirages, puis isolation épaules et bras.',
+        exercises: [
+          { name: 'Développé horizontal', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Tirage horizontal', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Développé vertical', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Écarté', sets: '3 à 4', reps: '8 à 15', rest: '1’30 à 2’' },
+          { name: 'Flexion biceps', sets: '3 à 4', reps: '8 à 15', rest: '1’30 à 2’' }
+        ]
+      },
+      {
+        day: 'lower 1',
+        type: 'lower',
+        title: 'Bas du corps — variante 1',
+        detail: 'Squat en ouverture, puis unilatéral, isolation et chaîne postérieure.',
+        exercises: [
+          { name: 'Squat', sets: '3 à 4', reps: '8 à 15', rest: '2’30 à 3’' },
+          { name: 'Fentes', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Legs extension', sets: '3 à 4', reps: '8 à 15', rest: '1’30' },
+          { name: 'Ext. mollets debout', sets: '3 à 4', reps: '8 à 15', rest: '1’30 à 2’' },
+          { name: 'Soulevé de terre roumain', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' }
+        ]
+      },
+      {
+        day: 'upper 2',
+        type: 'upper',
+        title: 'Haut du corps — variante 2',
+        detail: 'Même schéma, angles et prises alternés.',
+        exercises: [
+          { name: 'Développé incliné', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Tirage vertical', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Tirage horizontal', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Élévation latérale', sets: '3 à 4', reps: '8 à 15', rest: '1’30 à 2’' },
+          { name: 'Extension triceps', sets: '3 à 4', reps: '8 à 15', rest: '1’30 à 2’' }
+        ]
+      },
+      {
+        day: 'lower 2',
+        type: 'lower',
+        title: 'Bas du corps — variante 2',
+        detail: 'Squat conservé les deux séances, le reste alterne.',
+        exercises: [
+          { name: 'Squat', sets: '3 à 4', reps: '8 à 15', rest: '2’30 à 3’' },
+          { name: 'Hack squat ou leg press', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Legs curl', sets: '3 à 4', reps: '8 à 15', rest: '1’30' },
+          { name: 'Ext. mollets assis', sets: '3 à 4', reps: '8 à 15', rest: '1’30 à 2’' },
+          { name: 'Goodmorning', sets: '3 à 4', reps: '8 à 15', rest: '1’30 à 2’' }
+        ]
+      }
+    ],
+    rules: [
+      'La fourchette de répétitions est large pour simplifier la progression.',
+      'Le squat ouvre les deux séances de bas du corps : c’est le mouvement à faire frais.',
+      'Semaine type : upper 1, lower 1, upper 2, lower 2.'
+    ]
+  },
+  {
+    id: 'ppl',
+    group: 'Musculation',
+    name: 'Push / Pull / Legs',
+    meta: '5 séances/sem et plus · 3 séances qui tournent',
+    focus: 'Mélange de polyarticulaires et d’isolation, adapté à tous les niveaux et particulièrement à une fréquence haute (cinq entraînements par semaine et plus). Les trois séances tournent en boucle.',
+    sessions: [
+      {
+        day: 'push',
+        type: 'push',
+        title: 'Push — pectoraux, épaules, triceps',
+        detail: 'Deux développés lourds, puis isolation.',
+        exercises: [
+          { name: 'Développé horizontal', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Développé vertical', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Écarté + élévation latérale', sets: '3 à 4', reps: '8 à 15', rest: '1’30 à 2’' },
+          { name: 'Extension triceps', sets: '3 à 4', reps: '8 à 15', rest: '1’30 à 2’' },
+          { name: 'Élévation latérale (unilatérale)', sets: '3', reps: '8 à 15', rest: '1’30' }
+        ]
+      },
+      {
+        day: 'pull',
+        type: 'pull',
+        title: 'Pull — dos, arrière d’épaules, biceps',
+        detail: 'Deux tirages lourds, puis isolation dos et bras.',
+        exercises: [
+          { name: 'Tirage horizontal', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Tirage vertical', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Pull over + face pulls', sets: '3 à 4', reps: '8 à 15', rest: '1’30 à 2’' },
+          { name: 'Biceps curl', sets: '3 à 4', reps: '8 à 15', rest: '1’30 à 2’' },
+          { name: 'Élévation postérieure (unilatérale)', sets: '3', reps: '8 à 15', rest: '1’30' }
+        ]
+      },
+      {
+        day: 'legs',
+        type: 'legs',
+        title: 'Legs — jambes complètes',
+        detail: 'Squat frais en ouverture, puis quadriceps, chaîne postérieure et mollets.',
+        exercises: [
+          { name: 'Squat', sets: '3 à 4', reps: '8 à 15', rest: '2’30 à 3’' },
+          { name: 'Hack squat', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'SdT roumain', sets: '3 à 4', reps: '8 à 15', rest: '2’ à 2’30' },
+          { name: 'Legs curl + legs extension', sets: '3 à 4', reps: '8 à 15', rest: '1’30 à 2’' },
+          { name: 'Extension mollets', sets: '3 à 5', reps: '8 à 15', rest: '1’30 à 2’' }
+        ]
+      }
+    ],
+    rules: [
+      'La fourchette de répétitions est large pour simplifier la progression.',
+      'Fréquence haute : la boucle push, pull, legs se répète, un jour de repos quand la fatigue s’accumule.',
+      'Les mouvements « A + B » s’enchaînent en superset.'
+    ]
+  },
+
   {
     id: 'spartan-p0',
-    group: 'Spartan 2027',
+    group: 'Prépa Spartan 2027',
     name: 'Phase 0 — Fondations',
     meta: '8 semaines · ~8 km/sem',
     start: '2026-08-03',
@@ -60,7 +225,7 @@ window.PROGRAMS = [
   },
   {
     id: 'spartan-p1',
-    group: 'Spartan 2027',
+    group: 'Prépa Spartan 2027',
     name: 'Phase 1 — Force & base aérobie',
     meta: '18 semaines · ~18 km/sem',
     start: '2026-09-28',
@@ -122,7 +287,7 @@ window.PROGRAMS = [
   },
   {
     id: 'spartan-p2',
-    group: 'Spartan 2027',
+    group: 'Prépa Spartan 2027',
     name: 'Phase 2 — Développement',
     meta: '17 semaines · ~28 km/sem',
     start: '2027-02-01',
@@ -192,7 +357,7 @@ window.PROGRAMS = [
   },
   {
     id: 'spartan-p3',
-    group: 'Spartan 2027',
+    group: 'Prépa Spartan 2027',
     name: 'Phase 3 — Spécifique Spartan',
     meta: '15 semaines · ~34 km/sem',
     start: '2027-05-31',
@@ -260,7 +425,7 @@ window.PROGRAMS = [
   },
   {
     id: 'spartan-p4',
-    group: 'Spartan 2027',
+    group: 'Prépa Spartan 2027',
     name: 'Phase 4 — Affûtage',
     meta: '~5 semaines · ~20 km/sem',
     start: '2027-09-13',
@@ -310,40 +475,8 @@ window.PROGRAMS = [
   },
 
   {
-    id: 'entretien',
-    group: 'Hors-Spartan',
-    name: 'Muscu entretien',
-    meta: '2 séances/sem · durée libre',
-    focus: 'Bloc de maintien quand la prépa est en pause : vacances, semaine chargée, plateau, intersaison. On garde la force et le grip, on arrête de chercher la progression. Deux séances full body suffisent à ne rien perdre.',
-    sessions: [
-      {
-        day: 'séance 1',
-        type: 'muscu A',
-        title: 'Full body — dominante tirage',
-        detail: 'Échauffement épaules 5 min. Tractions ou tirage vertical 4×6-8 (2 reps en réserve) · Développé couché ou haltères 3×8 · Rowing 3×8 · Goblet squat 3×10 · Dead hang 3×30 s · Planche 3×45 s.'
-      },
-      {
-        day: 'séance 2',
-        type: 'muscu B',
-        title: 'Full body — dominante jambes',
-        detail: 'Échauffement vélo 5 min. Squat ou presse 3×8 · Soulevé de terre roumain 3×8 · Développé militaire 3×8 · Tirage horizontal 3×10 · Farmer walk 3×30 m · Mollets 3×15.'
-      },
-      {
-        day: 'optionnel',
-        type: 'repos actif',
-        title: 'VTT, marche ou tapis — 30-45 min',
-        detail: 'Une sortie facile par semaine suffit à garder la base aérobie. Allure conversation.'
-      }
-    ],
-    rules: [
-      'Charges à ~80 % de ce que tu faisais en prépa, jamais d’échec. Maintenir, pas progresser.',
-      'Ordre libre, 48 h entre les deux séances.',
-      'Si le bloc dure plus de 6 semaines, repasser par « Reprise après pause » avant de reprendre une phase.'
-    ]
-  },
-  {
     id: 'mobilite',
-    group: 'Hors-Spartan',
+    group: 'Annexes',
     name: 'Mobilité & préventif genou',
     meta: '20 min · jours de repos',
     focus: 'Séance courte à glisser sur un jour de repos actif ou après une séance. Cible le genou droit sensible, les chevilles (impact course) et les hanches (côtes, portés). Pas de fatigue, pas de charge.',
@@ -375,7 +508,7 @@ window.PROGRAMS = [
   },
   {
     id: 'reprise',
-    group: 'Hors-Spartan',
+    group: 'Annexes',
     name: 'Reprise après pause',
     meta: '2 semaines · réamorçage',
     focus: 'À faire après une pause de 2 semaines ou plus (vacances, maladie, blessure guérie) avant de rejoindre la phase en cours. Objectif : réhabituer tendons et genoux avant de remettre du volume.',

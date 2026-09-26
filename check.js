@@ -21,6 +21,12 @@ for (const p of P) {
     for (const k of ['day', 'type', 'title', 'detail']) {
       assert(typeof s[k] === 'string' && s[k], `${p.id}/${s.day}: champ ${k} manquant`);
     }
+    // Exercices : optionnels, mais chaque ligne complète (nom, séries, reps, repos).
+    for (const x of s.exercises || []) {
+      for (const k of ['name', 'sets', 'reps', 'rest']) {
+        assert(typeof x[k] === 'string' && x[k], `${p.id}/${s.day}: exercice sans ${k}`);
+      }
+    }
     // Repères Lui / Elle : optionnels, mais jamais à moitié remplis.
     for (const t of s.targets || []) {
       for (const k of ['ex', 'lui', 'elle']) {
@@ -29,8 +35,14 @@ for (const p of P) {
       assert(t.lui !== t.elle, `${p.id}/${s.day} — ${t.ex}: repère identique, autant le mettre dans le détail`);
     }
   }
+  // Un programme de musculation décrit ses exercices, pas juste un paragraphe.
+  if (p.group === 'Musculation') {
+    for (const s of p.sessions) {
+      assert((s.exercises || []).length, `${p.id}/${s.day}: séance de muscu sans exercices`);
+    }
+  }
   // Toute séance de muscu Spartan porte des repères chiffrés.
-  if (p.group === 'Spartan 2027') {
+  if (p.group === 'Prépa Spartan 2027') {
     for (const s of p.sessions.filter((s) => s.type.includes('muscu') || s.type.includes('porté'))) {
       assert((s.targets || []).length, `${p.id}/${s.day}: séance de muscu sans repères Lui/Elle`);
     }
@@ -53,19 +65,6 @@ for (let i = 1; i < phases.length; i++) {
     veille.toISOString().slice(0, 10),
     `trou ou chevauchement entre ${phases[i - 1].id} et ${phases[i].id}`
   );
-}
-
-// Logique "phase en cours" : reprise telle quelle depuis index.html.
-const isNow = (p, today) => !!p.start && !!p.end && today >= p.start && today <= p.end;
-const p1 = P.find((p) => p.id === 'spartan-p1');
-assert(isNow(p1, '2026-09-28'), 'premier jour inclus');
-assert(isNow(p1, '2027-01-31'), 'dernier jour inclus');
-assert(!isNow(p1, '2026-09-27'), 'veille exclue');
-assert(!isNow(p1, '2027-02-01'), 'lendemain exclu');
-assert(!isNow(P.find((p) => p.id === 'entretien'), '2026-09-28'), 'programme sans dates : jamais en cours');
-// Au plus une phase en cours à une date donnée (découle du non-chevauchement).
-for (const d of ['2026-08-03', '2026-12-01', '2027-05-30', '2027-10-15']) {
-  assert.strictEqual(P.filter((p) => isNow(p, d)).length, 1, `${d}: devrait être dans une seule phase`);
 }
 
 // Chaque type de séance tombe sur une couleur d'accent définie dans le CSS.

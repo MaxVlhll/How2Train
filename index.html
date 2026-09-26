@@ -16,6 +16,8 @@
     --force: #f5a524;
     --course: #38bdf8;
     --hybride: #f43f5e;
+    --pull: #a78bfa;
+    --legs: #34d399;
     --repos: #7c8798;
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -77,16 +79,6 @@
   .pick:hover { background: var(--card-hi); }
   .pick-name { font-size: 18px; font-weight: 600; }
   .pick-meta { color: var(--dim); font-size: 14px; }
-  .now {
-    flex: none;
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: rgba(245,165,36,.14);
-    color: var(--force);
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: .04em;
-  }
 
   .title { margin: 0 0 6px; font-size: 27px; line-height: 1.2; font-weight: 700; }
   .meta { color: var(--dim); font-size: 14px; }
@@ -118,6 +110,25 @@
     font-size: 15px;
     border-top: 1px solid var(--line);
   }
+
+  .ex { padding: 0 18px 4px; }
+  .ex-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 9px 0;
+    border-top: 1px solid var(--line);
+  }
+  .ex-name { font-size: 15px; }
+  .ex-num {
+    flex: none;
+    color: var(--dim);
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+  .ex-rest { display: block; color: #55606f; }
 
   .targets { padding: 0 18px 16px; }
   .t-row {
@@ -174,16 +185,12 @@
   function accent(type) {
     var t = type.toLowerCase();
     if (t.indexOf('hybride') > -1) return 'var(--hybride)';
-    if (t.indexOf('muscu') > -1 || t.indexOf('porté') > -1) return 'var(--force)';
+    if (t.indexOf('lower') > -1 || t.indexOf('legs') > -1) return 'var(--legs)';
+    if (t.indexOf('pull') > -1) return 'var(--pull)';
+    if (t.indexOf('muscu') > -1 || t.indexOf('porté') > -1 || t.indexOf('full body') > -1 ||
+        t.indexOf('upper') > -1 || t.indexOf('push') > -1) return 'var(--force)';
     if (t.indexOf('repos') > -1) return 'var(--repos)';
     return 'var(--course)';
-  }
-
-  // Phase en cours = aujourd'hui dans [start, end]. Programmes sans dates : jamais.
-  function isNow(p) {
-    if (!p.start || !p.end) return false;
-    var today = new Date().toISOString().slice(0, 10);
-    return today >= p.start && today <= p.end;
   }
 
   function el(tag, cls, text) {
@@ -196,6 +203,22 @@
   function dateRange(p) {
     if (!p.start) return '';
     return ' · ' + p.start.split('-').reverse().join('/') + ' → ' + p.end.split('-').reverse().join('/');
+  }
+
+  // Liste d'exercices : nom à gauche, séries × répétitions et repos à droite.
+  function exercises(list) {
+    var box = el('div', 'ex');
+    list.forEach(function (x) {
+      var r = el('div', 'ex-row');
+      r.appendChild(el('div', 'ex-name', x.name));
+      // « 3 à 4 » → « 3-4 » : plus court à lire entre deux séries.
+      var court = function (v) { return v.replace(' à ', '-'); };
+      var n = el('div', 'ex-num', court(x.sets) + ' × ' + court(x.reps));
+      n.appendChild(el('span', 'ex-rest', 'repos ' + x.rest));
+      r.appendChild(n);
+      box.appendChild(r);
+    });
+    return box;
   }
 
   // Repères chiffrés Lui / Elle pour les exercices où la charge ou le temps diffère.
@@ -233,7 +256,6 @@
         left.appendChild(el('div', 'pick-name', p.name));
         left.appendChild(el('div', 'pick-meta', p.meta + dateRange(p)));
         b.appendChild(left);
-        if (isNow(p)) b.appendChild(el('span', 'now', 'en cours'));
         b.onclick = function () { go(p.id); };
         app.appendChild(b);
       });
@@ -259,6 +281,7 @@
       sum.appendChild(el('div', 's-title', s.title));
       d.appendChild(sum);
       d.appendChild(el('div', 'detail', s.detail));
+      if (s.exercises && s.exercises.length) d.appendChild(exercises(s.exercises));
       if (s.targets && s.targets.length) d.appendChild(targets(s.targets));
       app.appendChild(d);
     });
