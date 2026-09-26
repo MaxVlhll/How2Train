@@ -21,6 +21,17 @@ for (const p of P) {
     for (const k of ['day', 'type', 'title', 'detail']) {
       assert(typeof s[k] === 'string' && s[k], `${p.id}/${s.day}: champ ${k} manquant`);
     }
+    // Séances d'un bloc : optionnelles, mais toujours un intitulé et un contenu.
+    for (const i of s.items || []) {
+      for (const k of ['label', 'text']) {
+        assert(typeof i[k] === 'string' && i[k], `${p.id}/${s.day}: item sans ${k}`);
+      }
+    }
+    // Une séance décrit son contenu d'une façon ou d'une autre.
+    assert(
+      s.detail || (s.items || []).length || (s.exercises || []).length,
+      `${p.id}/${s.day}: séance vide`
+    );
     // Exercices : optionnels, mais chaque ligne complète (nom, séries, reps, repos).
     for (const x of s.exercises || []) {
       for (const k of ['name', 'sets', 'reps', 'rest']) {

@@ -4,8 +4,10 @@ Les programmes d'entraînement à suivre. Rien d'autre : pas de suivi, pas de
 stats, pas de calendrier. On choisit un training sur l'accueil, on lit ses
 séances.
 
-Trois sections : **Musculation** (full body, upper/lower, push-pull-legs),
-**Prépa Spartan 2027** (les 5 phases) et **Annexes** (mobilité, reprise).
+Cinq sections : **Musculation** (full body, upper/lower, push-pull-legs),
+**Course à pied** (débutant, 5 km, 10 km, semi, marathon), **Prépa Spartan
+2027** (les 5 phases), **Autres sports** (poids du corps, hybride, CrossFit) et
+**Annexes** (mobilité, reprise).
 
 ## Ouvrir
 
@@ -41,6 +43,9 @@ Tout se passe dans `data.js`. Copier un bloc, changer l'`id` :
       exercises: [                        // optionnel : liste d'exercices
         { name: 'Squat', sets: '3 à 4', reps: '8 à 15', rest: '2’30 à 3’' }
       ],
+      items: [                            // optionnel : séances d'un bloc
+        { label: 'Sortie longue', text: '1 h 30 en Z2.' }
+      ],
       targets: [                          // optionnel : repères Lui / Elle
         { ex: 'Squat 4×8', lui: '70-85 kg', elle: '40-50 kg' }
       ] }
@@ -55,6 +60,8 @@ Deux détails :
   de `meta`. Les programmes de musculation n'en ont pas.
 - `exercises` affiche la liste des mouvements avec séries × répétitions et
   temps de repos. « 3 à 4 » est raccourci en « 3-4 » à l'écran.
+- `items` sert aux programmes qui progressent dans le temps : une carte par
+  bloc de deux semaines, et dans la carte, une ligne par séance du bloc.
 - `targets` affiche un petit tableau Lui / Elle sous le détail : charges, temps
   ou objectifs de fin de phase, uniquement là où les deux diffèrent. Les
   valeurs sont des points de départ à calibrer (2 reps en réserve).
@@ -70,4 +77,7 @@ contiguës, couleurs existantes).
 - **Musculation** : PDF « Programmes Gratuits » de Lucas Gouiffes, recopié tel
   quel (séries, répétitions, repos, variantes de séance).
 - **Prépa Spartan 2027** : `SpartanTrack v2/docs/plan-spartan-2027.md`.
-- **Annexes** : mobilité et reprise, écrites pour ce site.
+- **Course à pied**, **Autres sports**, **Annexes** : écrits pour ce site, sur
+  les principes classiques de l'entraînement (80 % du volume en allure facile,
+  +10 % de volume par semaine au maximum, une seule variable qui monte à la
+  fois). Ce ne sont pas des plans d'un coach nommé.

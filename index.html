@@ -130,6 +130,17 @@
   }
   .ex-rest { display: block; color: #55606f; }
 
+  .items { padding: 0 18px 4px; }
+  .item { padding: 11px 0; border-top: 1px solid var(--line); }
+  .item-label {
+    margin-bottom: 3px;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent, var(--dim));
+  }
+  .item-text { color: #c3cdda; font-size: 15px; }
+
   .targets { padding: 0 18px 16px; }
   .t-row {
     display: grid;
@@ -187,8 +198,10 @@
     if (t.indexOf('hybride') > -1) return 'var(--hybride)';
     if (t.indexOf('lower') > -1 || t.indexOf('legs') > -1) return 'var(--legs)';
     if (t.indexOf('pull') > -1) return 'var(--pull)';
+    if (t.indexOf('gymnastique') > -1) return 'var(--pull)';
     if (t.indexOf('muscu') > -1 || t.indexOf('porté') > -1 || t.indexOf('full body') > -1 ||
-        t.indexOf('upper') > -1 || t.indexOf('push') > -1) return 'var(--force)';
+        t.indexOf('upper') > -1 || t.indexOf('push') > -1 || t.indexOf('force') > -1 ||
+        t.indexOf('poids du corps') > -1) return 'var(--force)';
     if (t.indexOf('repos') > -1) return 'var(--repos)';
     return 'var(--course)';
   }
@@ -203,6 +216,18 @@
   function dateRange(p) {
     if (!p.start) return '';
     return ' · ' + p.start.split('-').reverse().join('/') + ' → ' + p.end.split('-').reverse().join('/');
+  }
+
+  // Séances d'un bloc (programmes de course) : un intitulé, puis son contenu.
+  function items(list) {
+    var box = el('div', 'items');
+    list.forEach(function (i) {
+      var row = el('div', 'item');
+      row.appendChild(el('div', 'item-label', i.label));
+      row.appendChild(el('div', 'item-text', i.text));
+      box.appendChild(row);
+    });
+    return box;
   }
 
   // Liste d'exercices : nom à gauche, séries × répétitions et repos à droite.
@@ -281,6 +306,7 @@
       sum.appendChild(el('div', 's-title', s.title));
       d.appendChild(sum);
       d.appendChild(el('div', 'detail', s.detail));
+      if (s.items && s.items.length) d.appendChild(items(s.items));
       if (s.exercises && s.exercises.length) d.appendChild(exercises(s.exercises));
       if (s.targets && s.targets.length) d.appendChild(targets(s.targets));
       app.appendChild(d);

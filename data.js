@@ -168,6 +168,383 @@ window.PROGRAMS = [
     ]
   },
 
+  // Course à pied — plans construits sur les principes classiques de l'endurance :
+  // 80 % du volume en allure facile, une seule variable qui monte à la fois,
+  // +10 % de volume par semaine au maximum.
+  {
+    id: 'course-debut',
+    group: 'Course à pied',
+    name: 'Débuter la course — 0 à 30 min',
+    meta: '8 semaines · 3 séances/sem',
+    focus: 'Passer de zéro à 30 minutes de course continue, sans casse. L’alternance marche/course laisse aux tendons et aux articulations le temps de s’adapter — c’est elle qui fait la différence entre une reprise qui tient et une blessure au bout d’un mois.',
+    sessions: [
+      {
+        day: 'semaines 1-2',
+        type: 'marche/course',
+        title: '8 × 1 min de course',
+        detail: 'Trois séances par semaine, jamais deux jours de suite.',
+        items: [
+          { label: 'Les 3 séances', text: '5 min de marche rapide · 8 × [1 min de course lente / 2 min de marche] · 5 min de marche. 34 min en tout.' },
+          { label: 'Si c’est trop dur', text: 'Descendre à 45 s de course et garder 2 min de marche. Refaire le bloc une semaine de plus plutôt que de forcer le passage.' }
+        ]
+      },
+      {
+        day: 'semaines 3-4',
+        type: 'marche/course',
+        title: '6 × 2 min de course',
+        detail: 'La course s’allonge, la marche reste à 2 min.',
+        items: [
+          { label: 'Les 3 séances', text: '5 min de marche · 6 × [2 min de course / 2 min de marche] · 5 min de marche.' },
+          { label: 'Si c’est facile', text: 'Passer à 7 répétitions la deuxième semaine. Ne pas accélérer : allonger, c’est tout.' }
+        ]
+      },
+      {
+        day: 'semaines 5-6',
+        type: 'marche/course',
+        title: '5 × 4 min de course',
+        detail: 'La marche se raccourcit — c’est là que le cardio bascule.',
+        items: [
+          { label: 'Les 3 séances', text: '5 min de marche · 5 × [4 min de course / 90 s de marche] · 5 min de marche.' },
+          { label: 'Variante', text: 'Une des trois séances peut se faire sur tapis, pente 1 %, si le terrain est dur ou le temps mauvais.' }
+        ]
+      },
+      {
+        day: 'semaines 7-8',
+        type: 'course Z2',
+        title: 'Vers les 30 min continus',
+        detail: 'Dernier bloc : les coupures de marche disparaissent.',
+        items: [
+          { label: 'Séances 1 et 2', text: '5 min de marche · 3 × [8 min de course / 2 min de marche] · 5 min de marche.' },
+          { label: 'Séance 3', text: '5 min de marche · 2 × [12 min de course / 2 min de marche] · 5 min de marche.' },
+          { label: 'Test de fin de bloc', text: 'Dernière séance de la semaine 8 : 30 min de course continue, à l’allure la plus lente possible. C’est l’objectif, pas un chrono.' }
+        ]
+      }
+    ],
+    rules: [
+      'Allure conversation : si tu ne peux pas parler en courant, tu vas trop vite. C’est la seule règle d’allure de ce plan.',
+      '48 h entre deux séances : les tendons s’adaptent plus lentement que le cardio.',
+      'Douleur articulaire (genou, tibia, cheville) : 3 jours de repos, puis reprise au bloc précédent. Une douleur qui revient trois fois = avis médical.',
+      'Un bloc peut durer trois semaines au lieu de deux. Personne ne le saura, et le plan tiendra mieux.'
+    ]
+  },
+  {
+    id: 'course-5k',
+    group: 'Course à pied',
+    name: '5 km',
+    meta: '8 semaines · 3 séances/sem',
+    focus: 'Construire un 5 km puis le chronométrer. Suppose de tenir déjà 30 min de course continue. Trois séances : une facile, une dure, une longue — jamais deux dures dans la même semaine.',
+    sessions: [
+      {
+        day: 'semaines 1-2',
+        type: 'course Z2',
+        title: 'Mise en route',
+        detail: 'On installe le volume avant l’intensité.',
+        items: [
+          { label: 'Séance 1 · endurance', text: '35 min en Z2, allure conversation.' },
+          { label: 'Séance 2 · fractionné', text: '15 min d’échauffement · 6 × [400 m rapides / 200 m trot] · 10 min de retour au calme.' },
+          { label: 'Séance 3 · sortie longue', text: '45 min en Z2, terrain plat.' }
+        ]
+      },
+      {
+        day: 'semaines 3-4',
+        type: 'fractionné',
+        title: 'Le volume monte',
+        detail: 'Deux répétitions de plus, dix minutes de longue en plus.',
+        items: [
+          { label: 'Séance 1 · endurance', text: '40 min en Z2.' },
+          { label: 'Séance 2 · fractionné', text: '15 min d’échauffement · 8 × [400 m / 200 m trot] · 10 min de retour au calme.' },
+          { label: 'Séance 3 · sortie longue', text: '50 min en Z2, quelques faux plats.' }
+        ]
+      },
+      {
+        day: 'semaines 5-6',
+        type: 'fractionné',
+        title: 'Répétitions longues',
+        detail: 'Les 800 m apprennent à tenir l’allure, pas à sprinter.',
+        items: [
+          { label: 'Séance 1 · endurance', text: '40 min en Z2.' },
+          { label: 'Séance 2 · fractionné', text: '15 min d’échauffement · 5 × [800 m à allure 5 km / 2 min de trot] · 10 min de retour au calme.' },
+          { label: 'Séance 3 · sortie longue', text: '55 min en Z2, dont 3 × 3 min à allure 5 km en milieu de sortie.' }
+        ]
+      },
+      {
+        day: 'semaines 7-8',
+        type: 'course Z2',
+        title: 'Affûtage et test',
+        detail: 'Le volume baisse, la vitesse reste. On arrive frais.',
+        items: [
+          { label: 'Séance 1 · endurance', text: '30 min en Z2 + 4 lignes droites de 20 s en fin de séance.' },
+          { label: 'Séance 2 · rappel', text: '15 min d’échauffement · 4 × [400 m à allure 5 km / 2 min de trot] · 10 min de retour au calme.' },
+          { label: 'Séance 3 · test', text: 'Dernière séance de la semaine 8 : 5 km chronométrés. 15 min d’échauffement, départ prudent, accélération sur le dernier kilomètre.' }
+        ]
+      }
+    ],
+    rules: [
+      '80 % du temps de course en Z2. Seule la séance de fractionné est dure — la longue reste facile.',
+      'Les 400 m se courent à allure 5 km moins 10-15 s/km, pas à fond : tu dois pouvoir faire la dernière comme la première.',
+      '15 min d’échauffement progressif avant tout fractionné, sans exception.',
+      'Une semaine ratée ne se rattrape pas : reprendre au bloc en cours, pas au suivant.'
+    ]
+  },
+  {
+    id: 'course-10k',
+    group: 'Course à pied',
+    name: '10 km',
+    meta: '10 semaines · 3 à 4 séances/sem',
+    focus: 'Suppose de tenir 45 min de course continue. Le travail au seuil (allure que tu tiendrais 1 h en course) est le cœur du plan : c’est lui qui déplace l’allure sur 10 km.',
+    sessions: [
+      {
+        day: 'semaines 1-2',
+        type: 'seuil',
+        title: 'Installation du seuil',
+        detail: '3 séances, une 4e facile en option.',
+        items: [
+          { label: 'Séance 1 · endurance', text: '45 min en Z2.' },
+          { label: 'Séance 2 · seuil', text: '15 min d’échauffement · 2 × [8 min à allure 10 km / 3 min de trot] · 10 min de retour au calme.' },
+          { label: 'Séance 3 · sortie longue', text: '60 min en Z2.' },
+          { label: 'Séance 4 (option)', text: '30 min en Z2 très facile, ou 45 min de vélo.' }
+        ]
+      },
+      {
+        day: 'semaines 3-4',
+        type: 'seuil',
+        title: 'Le seuil s’allonge',
+        detail: 'Trois blocs au lieu de deux.',
+        items: [
+          { label: 'Séance 1 · endurance', text: '50 min en Z2.' },
+          { label: 'Séance 2 · seuil', text: '15 min d’échauffement · 3 × [8 min à allure 10 km / 3 min de trot] · 10 min de retour au calme.' },
+          { label: 'Séance 3 · sortie longue', text: '70 min en Z2, terrain vallonné en marchant les raidillons.' }
+        ]
+      },
+      {
+        day: 'semaines 5-6',
+        type: 'fractionné',
+        title: 'Vitesse pure',
+        detail: 'Un bloc de VMA pour élargir le plafond.',
+        items: [
+          { label: 'Séance 1 · endurance', text: '50 min en Z2.' },
+          { label: 'Séance 2 · VMA', text: '15 min d’échauffement · 8 × [400 m vite / 1 min 30 de trot] · 10 min de retour au calme.' },
+          { label: 'Séance 3 · sortie longue', text: '75 min en Z2.' },
+          { label: 'Séance 4 (option)', text: '30 min très facile, jambes lourdes autorisées.' }
+        ]
+      },
+      {
+        day: 'semaines 7-8',
+        type: 'seuil',
+        title: 'Bloc le plus dur',
+        detail: 'Volume et intensité au maximum du plan.',
+        items: [
+          { label: 'Séance 1 · endurance', text: '50 min en Z2.' },
+          { label: 'Séance 2 · seuil', text: '15 min d’échauffement · 2 × [12 min à allure 10 km / 3 min de trot] · 10 min de retour au calme.' },
+          { label: 'Séance 3 · fractionné', text: '15 min d’échauffement · 6 × [600 m / 2 min de trot] · 10 min de retour au calme.' },
+          { label: 'Séance 4 · sortie longue', text: '80 min en Z2.' }
+        ]
+      },
+      {
+        day: 'semaines 9-10',
+        type: 'course Z2',
+        title: 'Affûtage et test',
+        detail: 'Volume réduit de 40 %, intensité courte conservée.',
+        items: [
+          { label: 'Séance 1 · endurance', text: '35 min en Z2 + 4 lignes droites.' },
+          { label: 'Séance 2 · rappel', text: '15 min d’échauffement · 3 × [5 min à allure 10 km / 3 min de trot] · 10 min de retour au calme.' },
+          { label: 'Séance 3 · test', text: '10 km chronométrés en fin de semaine 10. Partir 5 s/km plus lentement que l’allure visée, accélérer après le 5e kilomètre.' }
+        ]
+      }
+    ],
+    rules: [
+      'Allure seuil = celle que tu tiendrais environ une heure en course : difficile mais régulière, pas asphyxiante.',
+      'Jamais deux séances dures d’affilée. La 4e séance optionnelle est toujours facile, sinon elle ne sert à rien.',
+      'Volume hebdomadaire : +10 % maximum d’une semaine à l’autre.',
+      'Fatigue persistante après trois nuits de sommeil correctes : sauter la séance de seuil de la semaine, garder les faciles.'
+    ]
+  },
+  {
+    id: 'course-semi',
+    group: 'Course à pied',
+    name: 'Semi-marathon',
+    meta: '12 semaines · 4 séances/sem',
+    focus: 'Suppose un 10 km déjà en jambes. Le plan construit la sortie longue jusqu’à 1 h 45 et installe l’allure semi, celle que tu devras tenir 21 km le jour J.',
+    sessions: [
+      {
+        day: 'semaines 1-2',
+        type: 'course Z2',
+        title: 'Base',
+        detail: '4 séances : 2 faciles, 1 seuil, 1 longue.',
+        items: [
+          { label: 'Séances faciles (×2)', text: '40 min et 45 min en Z2.' },
+          { label: 'Séance de seuil', text: '15 min d’échauffement · 3 × [8 min à allure 10 km / 3 min de trot] · 10 min de retour au calme.' },
+          { label: 'Sortie longue', text: '1 h 05 en Z2.' }
+        ]
+      },
+      {
+        day: 'semaines 3-4',
+        type: 'seuil',
+        title: 'Allure semi',
+        detail: 'Premier contact avec l’allure de course.',
+        items: [
+          { label: 'Séances faciles (×2)', text: '40 min et 50 min en Z2.' },
+          { label: 'Séance spécifique', text: '15 min d’échauffement · 3 × [2 km à allure semi / 3 min de trot] · 10 min de retour au calme.' },
+          { label: 'Sortie longue', text: '1 h 15 en Z2.' }
+        ]
+      },
+      {
+        day: 'semaines 5-6',
+        type: 'sortie longue',
+        title: 'Le volume monte',
+        detail: 'La semaine 6 est allégée de 30 % — c’est prévu.',
+        items: [
+          { label: 'Séances faciles (×2)', text: '45 min et 50 min en Z2.' },
+          { label: 'Séance de seuil', text: '15 min d’échauffement · 4 × [8 min à allure 10 km / 2 min de trot] · 10 min de retour au calme.' },
+          { label: 'Sortie longue', text: '1 h 25 en Z2 la semaine 5. Semaine 6 : 1 h seulement, tout allégé.' }
+        ]
+      },
+      {
+        day: 'semaines 7-8',
+        type: 'seuil',
+        title: 'Spécifique',
+        detail: 'Les blocs à allure semi s’allongent.',
+        items: [
+          { label: 'Séances faciles (×2)', text: '45 min et 50 min en Z2.' },
+          { label: 'Séance spécifique', text: '15 min d’échauffement · 2 × [5 km à allure semi / 5 min de trot] · 10 min de retour au calme.' },
+          { label: 'Sortie longue', text: '1 h 35 en Z2, dont les 20 dernières minutes à allure semi.' }
+        ]
+      },
+      {
+        day: 'semaines 9-10',
+        type: 'sortie longue',
+        title: 'Point haut',
+        detail: 'La plus grosse charge du plan, puis on redescend.',
+        items: [
+          { label: 'Séances faciles (×2)', text: '45 min et 55 min en Z2.' },
+          { label: 'Séance de seuil', text: '15 min d’échauffement · 5 × [6 min à allure 10 km / 2 min de trot] · 10 min de retour au calme.' },
+          { label: 'Sortie longue', text: '1 h 45 en Z2, avec ravitaillement testé (boisson et gel).' }
+        ]
+      },
+      {
+        day: 'semaines 11-12',
+        type: 'course Z2',
+        title: 'Affûtage et course',
+        detail: 'Volume −50 %, dernière séance dure à J-8.',
+        items: [
+          { label: 'Séances faciles', text: '30 à 40 min en Z2, avec 4 lignes droites de 20 s.' },
+          { label: 'Rappel d’allure', text: '15 min d’échauffement · 3 × [1,5 km à allure semi / 3 min de trot]. À faire au plus tard à J-8.' },
+          { label: 'Sortie longue', text: '1 h en semaine 11, 40 min en semaine 12. Course le week-end de la semaine 12.' }
+        ]
+      }
+    ],
+    rules: [
+      'Allure semi = allure 10 km + 15 à 20 s/km. Sur la sortie longue, si tu ne peux plus parler, tu es trop vite.',
+      'Ravitaillement : boire toutes les 20 min et tester les gels sur les sorties de plus de 1 h 15. Rien de nouveau le jour J.',
+      'Semaine allégée toutes les 4 semaines (volume −30 %), non négociable.',
+      'Chaussures de course : rodées sur au moins 60 km avant la course, jamais neuves le jour J.'
+    ]
+  },
+  {
+    id: 'course-marathon',
+    group: 'Course à pied',
+    name: 'Marathon',
+    meta: '16 semaines · 4 à 5 séances/sem',
+    focus: 'Suppose un semi déjà couru. La sortie longue monte jusqu’à 3 h ou 32 km — jamais au-delà : le gain devient plus faible que le coût en récupération. L’affûtage dure trois semaines.',
+    sessions: [
+      {
+        day: 'semaines 1-2',
+        type: 'course Z2',
+        title: 'Base foncière',
+        detail: '4 séances, tout en aisance.',
+        items: [
+          { label: 'Séances faciles (×2)', text: '45 min et 50 min en Z2.' },
+          { label: 'Séance de seuil', text: '15 min d’échauffement · 3 × [8 min à allure 10 km / 3 min de trot] · 10 min de retour au calme.' },
+          { label: 'Sortie longue', text: '1 h 30 en Z2.' }
+        ]
+      },
+      {
+        day: 'semaines 3-4',
+        type: 'sortie longue',
+        title: 'Le long s’installe',
+        detail: 'Une 5e séance facile peut apparaître ici.',
+        items: [
+          { label: 'Séances faciles (×2 ou ×3)', text: '45 min, 50 min et 35 min en Z2.' },
+          { label: 'Séance de seuil', text: '15 min d’échauffement · 4 × [8 min à allure 10 km / 2 min de trot] · 10 min de retour au calme.' },
+          { label: 'Sortie longue', text: '1 h 45 en Z2, ravitaillement toutes les 45 min.' }
+        ]
+      },
+      {
+        day: 'semaines 5-6',
+        type: 'seuil',
+        title: 'Allure marathon',
+        detail: 'Premier travail spécifique. Semaine 6 allégée de 30 %.',
+        items: [
+          { label: 'Séances faciles (×3)', text: '45 min, 50 min, 35 min en Z2.' },
+          { label: 'Séance spécifique', text: '15 min d’échauffement · 2 × [6 km à allure marathon / 5 min de trot] · 10 min de retour au calme.' },
+          { label: 'Sortie longue', text: '2 h en Z2 la semaine 5. Semaine 6 : 1 h 15, tout allégé.' }
+        ]
+      },
+      {
+        day: 'semaines 7-8',
+        type: 'sortie longue',
+        title: 'Montée en charge',
+        detail: 'Le plan devient exigeant. Le sommeil compte autant que les séances.',
+        items: [
+          { label: 'Séances faciles (×3)', text: '50 min, 50 min, 40 min en Z2.' },
+          { label: 'Séance de seuil', text: '15 min d’échauffement · 5 × [6 min à allure 10 km / 2 min de trot] · 10 min de retour au calme.' },
+          { label: 'Sortie longue', text: '2 h 15 en Z2, dont les 30 dernières minutes à allure marathon.' }
+        ]
+      },
+      {
+        day: 'semaines 9-10',
+        type: 'sortie longue',
+        title: 'Endurance spécifique',
+        detail: 'La longue passe la barre des deux heures et demie.',
+        items: [
+          { label: 'Séances faciles (×3)', text: '50 min, 55 min, 40 min en Z2.' },
+          { label: 'Séance spécifique', text: '15 min d’échauffement · 3 × [5 km à allure marathon / 4 min de trot] · 10 min de retour au calme.' },
+          { label: 'Sortie longue', text: '2 h 30 ou 28 km en Z2, ravitaillement complet testé.' }
+        ]
+      },
+      {
+        day: 'semaines 11-12',
+        type: 'sortie longue',
+        title: 'Point haut du plan',
+        detail: 'La plus longue sortie, puis tout redescend.',
+        items: [
+          { label: 'Séances faciles (×3)', text: '50 min, 55 min, 40 min en Z2.' },
+          { label: 'Séance de seuil', text: '15 min d’échauffement · 4 × [8 min à allure 10 km / 2 min de trot] · 10 min de retour au calme.' },
+          { label: 'Sortie longue', text: '2 h 45 à 3 h, ou 32 km — le plafond du plan. Jamais plus long.' }
+        ]
+      },
+      {
+        day: 'semaines 13-14',
+        type: 'seuil',
+        title: 'Dernier bloc spécifique',
+        detail: 'Volume qui baisse, allure marathon qui reste.',
+        items: [
+          { label: 'Séances faciles (×2)', text: '45 min et 50 min en Z2.' },
+          { label: 'Séance spécifique', text: '15 min d’échauffement · 2 × [8 km à allure marathon / 5 min de trot] · 10 min de retour au calme.' },
+          { label: 'Sortie longue', text: '2 h en Z2, puis 1 h 30 la semaine suivante.' }
+        ]
+      },
+      {
+        day: 'semaines 15-16',
+        type: 'course Z2',
+        title: 'Affûtage et course',
+        detail: 'Volume divisé par deux, puis par trois. Dernière séance dure à J-10.',
+        items: [
+          { label: 'Séances faciles', text: '30 à 40 min en Z2, avec 4 lignes droites de 20 s pour garder du tonus.' },
+          { label: 'Rappel d’allure', text: '15 min d’échauffement · 3 × [2 km à allure marathon / 3 min de trot], au plus tard à J-10.' },
+          { label: 'Sortie longue', text: '1 h 15 en semaine 15, 40 min en semaine 16. Course le week-end de la semaine 16.' }
+        ]
+      }
+    ],
+    rules: [
+      'Allure marathon = allure semi + 10 à 15 s/km. Elle doit sembler trop facile pendant les 25 premiers kilomètres.',
+      'Sortie longue plafonnée à 3 h ou 32 km : au-delà, le coût en récupération dépasse le gain.',
+      'Ravitaillement : 30 à 60 g de glucides par heure, testés à l’entraînement. Le jour J ne s’improvise pas.',
+      'Semaine allégée toutes les 4 semaines. Un plan marathon se rate plus souvent par excès que par manque.',
+      'Douleur qui modifie la foulée : arrêt immédiat de la séance. Courir blessé coûte des semaines, pas des jours.'
+    ]
+  },
+
   {
     id: 'spartan-p0',
     group: 'Prépa Spartan 2027',
@@ -474,6 +851,175 @@ window.PROGRAMS = [
     ]
   },
 
+  {
+    id: 'poids-du-corps',
+    group: 'Autres sports',
+    name: 'Poids du corps — sans matériel',
+    meta: '3 séances/sem · 2 séances qui alternent',
+    focus: 'Full body sans salle ni charges : vacances, déplacement, salle fermée. La progression ne se fait pas en kilos mais en variantes — quand une variante devient facile, on passe à la suivante, pas à plus de répétitions.',
+    sessions: [
+      {
+        day: 'séance A',
+        type: 'poids du corps',
+        title: 'Poussée et gainage',
+        detail: 'Tempo lent : 2 s à la descente, pas de rebond. C’est ce qui remplace la charge.',
+        exercises: [
+          { name: 'Pompes (ou inclinées sur table)', sets: '4', reps: '8 à 15', rest: '1’30 à 2’' },
+          { name: 'Squats (ou bulgares sur chaise)', sets: '4', reps: '12 à 20', rest: '1’30 à 2’' },
+          { name: 'Dips sur chaise', sets: '3', reps: '8 à 15', rest: '1’30' },
+          { name: 'Fentes arrière', sets: '3', reps: '10 à 15 /jambe', rest: '1’30' },
+          { name: 'Gainage planche', sets: '3', reps: '30 à 60 s', rest: '1’' },
+          { name: 'Hollow hold', sets: '3', reps: '20 à 40 s', rest: '1’' }
+        ]
+      },
+      {
+        day: 'séance B',
+        type: 'poids du corps',
+        title: 'Tirage et chaîne postérieure',
+        detail: 'Le tirage demande une barre, une table solide ou un jeu d’anneaux. À défaut, élastique.',
+        exercises: [
+          { name: 'Tractions australiennes (sous une table)', sets: '4', reps: '8 à 15', rest: '1’30 à 2’' },
+          { name: 'Tractions négatives (descente 5 s)', sets: '3', reps: '3 à 6', rest: '2’' },
+          { name: 'Pont fessier une jambe', sets: '3', reps: '10 à 15 /jambe', rest: '1’30' },
+          { name: 'Good morning sans charge', sets: '3', reps: '15 à 20', rest: '1’30' },
+          { name: 'Mollets sur une marche', sets: '3', reps: '15 à 25', rest: '1’' },
+          { name: 'Gainage latéral', sets: '3', reps: '30 à 45 s /côté', rest: '1’' }
+        ]
+      }
+    ],
+    rules: [
+      'Progression par variante : quand tu tiens le haut de la fourchette sur toutes les séries, passe à la version plus dure (pompes inclinées → au sol → pieds surélevés → une main assistée).',
+      'Tempo 2 s à la descente, 1 s de pause en bas : sans charge, c’est le temps sous tension qui fait le travail.',
+      'Trois séances par semaine en alternant A et B : A, B, A une semaine, B, A, B la suivante.',
+      'Garder 2 répétitions en réserve sur chaque série, sauf la dernière du dernier exercice.'
+    ]
+  },
+  {
+    id: 'hybride',
+    group: 'Autres sports',
+    name: 'Hybride force + cardio',
+    meta: '4 séances/sem · style HYROX',
+    focus: 'Courir vite avec des jambes fatiguées et porter lourd avec un cardio saturé : c’est une qualité à part, qui ne s’obtient ni en salle de muscu seule, ni en courant seul. Le plan alterne une séance lourde, une de course, un circuit, une longue.',
+    sessions: [
+      {
+        day: 'séance 1',
+        type: 'force',
+        title: 'Force — lourd et court',
+        detail: 'Charges franches, récupération complète. C’est la seule séance où on cherche la charge.',
+        exercises: [
+          { name: 'Squat ou presse', sets: '5', reps: '5', rest: '2’30 à 3’' },
+          { name: 'Soulevé de terre', sets: '4', reps: '5', rest: '2’30 à 3’' },
+          { name: 'Développé militaire', sets: '4', reps: '6 à 8', rest: '2’' },
+          { name: 'Tractions (lestées si 10+)', sets: '4', reps: '5 à 8', rest: '2’' },
+          { name: 'Farmer walk lourd', sets: '4', reps: '40 m', rest: '2’' }
+        ]
+      },
+      {
+        day: 'séance 2',
+        type: 'fractionné',
+        title: 'Course — intervalles longs',
+        detail: 'L’allure cible est celle que tu tiendrais sur 10 km, pas un sprint.',
+        items: [
+          { label: 'Échauffement', text: '15 min progressives + 4 lignes droites de 20 s.' },
+          { label: 'Corps de séance', text: '4 × [1 km à allure 10 km / 90 s de marche]. Monter à 5 × 1 km quand les temps restent stables.' },
+          { label: 'Retour au calme', text: '10 min de trot très facile.' }
+        ]
+      },
+      {
+        day: 'séance 3',
+        type: 'circuit hybride',
+        title: 'Circuit — course + stations',
+        detail: '4 à 5 tours, 2 min de récupération entre les tours. Chronométrer chaque tour : l’écart entre le premier et le dernier est l’indicateur à faire baisser.',
+        exercises: [
+          { name: 'Course ou rameur', sets: '1 /tour', reps: '500 m', rest: 'enchaîné' },
+          { name: 'Wall balls ou thrusters', sets: '1 /tour', reps: '15', rest: 'enchaîné' },
+          { name: 'Farmer walk', sets: '1 /tour', reps: '50 m', rest: 'enchaîné' },
+          { name: 'Burpees', sets: '1 /tour', reps: '10', rest: 'enchaîné' },
+          { name: 'Fentes lestées', sets: '1 /tour', reps: '20 pas', rest: '2’ fin de tour' }
+        ]
+      },
+      {
+        day: 'séance 4',
+        type: 'sortie longue',
+        title: 'Longue + portés',
+        detail: 'La séance qui construit le fond. Terrain vallonné si possible.',
+        items: [
+          { label: 'Course', text: '60 à 80 min en Z2, allure conversation.' },
+          { label: 'Portés en fin de sortie', text: '4 × 100 m de sac lesté ou sled push, récupération 2 min. Sur jambes fatiguées, c’est le but.' },
+          { label: 'Étirements', text: '10 min : mollets, fléchisseurs de hanche, ischios.' }
+        ]
+      }
+    ],
+    rules: [
+      'Une seule séance lourde par semaine. Empiler force et circuits mène à la stagnation des deux.',
+      'Ordre dans la semaine : force, course, repos, circuit, repos, longue. Ne jamais coller circuit et longue.',
+      'Le circuit se juge au chrono, pas à la charge : si les tours s’effondrent, réduire les charges et garder la vitesse.',
+      'Technique avant charge sur les mouvements portés : un dos rond sous fatigue est la blessure classique de ce format.'
+    ]
+  },
+  {
+    id: 'crossfit',
+    group: 'Autres sports',
+    name: 'CrossFit',
+    meta: '4 à 5 séances/sem · structure type',
+    focus: 'Une séance type CrossFit tient en quatre temps : échauffement, travail de force ou de technique, WOD, accessoires. Ce programme donne la structure et quatre séances de référence — à adapter au matériel disponible et à scaler systématiquement.',
+    sessions: [
+      {
+        day: 'séance 1',
+        type: 'force',
+        title: 'Haltérophilie + WOD court',
+        detail: 'La technique passe avant la charge : un mouvement mal fait à l’échauffement le sera dix fois pire sous chrono.',
+        items: [
+          { label: 'Échauffement · 10 min', text: 'Rameur ou corde à sauter 3 min · mobilité épaules et hanches · 2 séries à vide du mouvement du jour.' },
+          { label: 'Force · 20 min', text: 'Back squat 5 × 5, en montant à 80 % du max. Repos 2 à 3 min entre les séries.' },
+          { label: 'WOD · 8 à 12 min', text: '« Fran » scalée : 21-15-9 thrusters (40/30 kg) et tractions. Version débutant : 15-12-9, thrusters à vide ou barre légère, tractions australiennes.' },
+          { label: 'Accessoires · 8 min', text: 'Gainage 3 × 45 s · face pulls 3 × 15.' }
+        ]
+      },
+      {
+        day: 'séance 2',
+        type: 'gymnastique',
+        title: 'Gymnastique + AMRAP',
+        detail: 'AMRAP = le plus de tours possible dans le temps imparti, à rythme tenable.',
+        items: [
+          { label: 'Échauffement · 10 min', text: 'Corde à sauter 3 min · rotations d’épaules · 3 × 5 tractions australiennes.' },
+          { label: 'Skill · 15 min', text: 'Travail de traction stricte ou de handstand contre un mur, par séries courtes et non fatigantes.' },
+          { label: 'WOD · 20 min', text: '« Cindy » : AMRAP 20 min de [5 tractions · 10 pompes · 15 squats]. Scaler les tractions en australiennes, les pompes sur les genoux.' },
+          { label: 'Accessoires · 8 min', text: 'Hollow hold 3 × 30 s · extensions dos 3 × 12.' }
+        ]
+      },
+      {
+        day: 'séance 3',
+        type: 'hybride',
+        title: 'EMOM — puissance et régularité',
+        detail: 'EMOM = un bloc de travail au début de chaque minute, le temps restant sert de repos. Si tu ne finis plus le bloc, réduis les répétitions.',
+        items: [
+          { label: 'Échauffement · 10 min', text: 'Rameur 500 m facile · mobilité hanches · 2 séries légères des mouvements du jour.' },
+          { label: 'WOD · 24 min', text: 'EMOM 24 min, en tournant : minute 1 — 12 kettlebell swings · minute 2 — 10 box jumps · minute 3 — 12 calories au rameur.' },
+          { label: 'Force · 10 min', text: 'Soulevé de terre 4 × 6 à charge modérée, technique impeccable.' },
+          { label: 'Accessoires · 5 min', text: 'Gainage latéral 3 × 30 s par côté.' }
+        ]
+      },
+      {
+        day: 'séance 4',
+        type: 'hybride',
+        title: 'WOD long — filière longue',
+        detail: 'Séance longue, charges légères, rythme régulier. L’erreur classique est de partir trop vite dans les cinq premières minutes.',
+        items: [
+          { label: 'Échauffement · 12 min', text: 'Course 800 m facile · mobilité complète · 2 tours légers du circuit.' },
+          { label: 'WOD · 25 à 35 min', text: '« Helen » × 3 tours : 400 m de course · 21 kettlebell swings · 12 tractions. Ou, en version longue : 5 tours de [500 m rameur · 20 wall balls · 15 burpees].' },
+          { label: 'Retour au calme · 10 min', text: 'Marche 5 min + étirements mollets, quadriceps, épaules.' }
+        ]
+      }
+    ],
+    rules: [
+      'Scaler est la règle, pas l’exception : un WOD se fait à intensité relative. Un débutant qui fait Fran prescrite apprend surtout à mal bouger vite.',
+      'Technique avant charge, charge avant chrono. Dans cet ordre, toujours.',
+      'Les mouvements d’haltérophilie (arraché, épaulé-jeté) s’apprennent avec un coach, pas avec une vidéo : ce sont les plus techniques de tout l’entraînement.',
+      'Quatre séances par semaine suffisent largement. À cinq et plus, prévoir un jour complet de repos et une semaine allégée par mois.',
+      'Douleur vive, dos qui s’arrondit ou technique qui se dégrade : la série s’arrête, même en plein chrono.'
+    ]
+  },
   {
     id: 'mobilite',
     group: 'Annexes',
