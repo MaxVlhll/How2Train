@@ -16,7 +16,13 @@ for (const p of P) {
   }
   assert(!ids.has(p.id), `id dupliqué : ${p.id}`);
   ids.add(p.id);
-  assert(p.sessions.length, `${p.id}: aucune séance`);
+  // Un programme a des séances, sauf les fiches outil (calculateur de diète).
+  if (p.tool) {
+    assert(p.tool === 'diete', `${p.id}: outil inconnu « ${p.tool} »`);
+    assert(html.includes(`p.tool === '${p.tool}'`), `${p.id}: outil non branché dans index.html`);
+  } else {
+    assert(p.sessions.length, `${p.id}: aucune séance`);
+  }
   for (const s of p.sessions) {
     for (const k of ['day', 'type', 'title', 'detail']) {
       assert(typeof s[k] === 'string' && s[k], `${p.id}/${s.day}: champ ${k} manquant`);
@@ -90,6 +96,46 @@ for (const p of P) {
   for (const s of p.sessions) {
     assert(html.includes(accent(s.type) + ':'), `couleur ${accent(s.type)} absente du CSS (type "${s.type}")`);
   }
+}
+
+// Minuteur de repos : le parseur de durée, repris tel quel depuis index.html.
+const secondes = (repos) => {
+  const m = /(\d+)\s*[’']\s*(\d+)?/.exec(repos);
+  return m ? parseInt(m[1], 10) * 60 + (m[2] ? parseInt(m[2], 10) : 0) : 0;
+};
+assert.strictEqual(secondes('2’30 à 3’'), 150, 'fourchette : on prend la borne basse');
+assert.strictEqual(secondes('2’ à 2’30'), 120, 'minutes pleines');
+assert.strictEqual(secondes('1’30'), 90, 'valeur unique');
+assert.strictEqual(secondes('1’'), 60, 'minute seule');
+assert.strictEqual(secondes('enchaîné'), 0, 'pas de durée = pas de minuteur');
+assert.strictEqual(secondes('fin de séance'), 0, 'pas de durée = pas de minuteur');
+// Tout repos affiché tombe soit sur une durée sensée, soit sur zéro.
+for (const p of P) {
+  for (const s of p.sessions) {
+    for (const x of s.exercises || []) {
+      const sec = secondes(x.rest);
+      assert(sec === 0 || (sec >= 30 && sec <= 300), `${p.id}/${s.day} — ${x.name}: repos aberrant (${sec} s)`);
+    }
+  }
+}
+
+// Diète : équation de Mifflin-St Jeor, reprise telle quelle depuis index.html.
+const mifflin = (sexe, poids, taille, age) =>
+  10 * poids + 6.25 * taille - 5 * age + (sexe === 'h' ? 5 : -161);
+assert.strictEqual(mifflin('h', 80, 180, 30), 1780, 'homme 80 kg / 180 cm / 30 ans');
+assert.strictEqual(mifflin('f', 60, 165, 30), 1320.25, 'femme 60 kg / 165 cm / 30 ans');
+assert(mifflin('h', 80, 180, 30) > mifflin('f', 80, 180, 30), 'la constante homme est plus haute');
+
+// Hors-ligne : les fichiers de l'app installable existent et se tiennent.
+const manifeste = JSON.parse(fs.readFileSync(path.join(__dirname, 'manifest.webmanifest'), 'utf8'));
+const sw = fs.readFileSync(path.join(__dirname, 'sw.js'), 'utf8');
+for (const i of manifeste.icons) {
+  assert(fs.existsSync(path.join(__dirname, i.src)), `icône manquante : ${i.src}`);
+}
+assert(html.includes('manifest.webmanifest'), 'index.html ne référence pas le manifeste');
+assert(html.includes("register('sw.js')"), 'index.html n’enregistre pas le service worker');
+for (const f of ['index.html', 'data.js', 'manifest.webmanifest']) {
+  assert(sw.includes(f), `${f} absent du cache hors-ligne`);
 }
 
 console.log(`OK — ${P.length} programmes, ${P.reduce((n, p) => n + p.sessions.length, 0)} séances.`);

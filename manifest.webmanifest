@@ -1,0 +1,17 @@
+{
+  "name": "How2Train",
+  "short_name": "How2Train",
+  "description": "Les programmes d'entraînement à suivre : musculation, course à pied, prépa Spartan.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0c0f14",
+  "theme_color": "#0c0f14",
+  "lang": "fr",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

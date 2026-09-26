@@ -9,20 +9,29 @@ Cinq sections : **Musculation** (full body, upper/lower, push-pull-legs),
 2027** (les 5 phases), **Autres sports** (poids du corps, hybride, CrossFit) et
 **Annexes** (mobilité, reprise).
 
+L'accueil liste les sections, une section liste ses programmes, un programme
+montre ses séances. Le temps de repos d'un exercice est cliquable : il lance un
+minuteur avec bip et vibration.
+
 ## Ouvrir
 
-Double-clic sur `index.html`. Pas de build, pas de `npm`, pas de serveur.
+En ligne : <https://maxvlhll.github.io/How2Train/> — sur téléphone, « Ajouter à
+l'écran d'accueil » installe l'app, qui fonctionne ensuite **sans réseau**.
 
-En ligne (accès téléphone) : pousser le dossier sur un dépôt GitHub, puis
-*Settings → Pages → Deploy from branch → main / root*.
+En local, double-clic sur `index.html`. Pas de build, pas de `npm`. Seule
+réserve : le mode hors-ligne exige `http(s)`, il ne s'active donc pas en
+`file://` — pour le tester, `python -m http.server`.
 
 ## Fichiers
 
-| Fichier      | Rôle |
-| ------------ | ---- |
-| `index.html` | Structure, style et affichage (les deux écrans) |
-| `data.js`    | Tout le contenu des programmes |
-| `check.js`   | Vérif du contenu : `node check.js` |
+| Fichier                 | Rôle |
+| ----------------------- | ---- |
+| `index.html`            | Structure, style, affichage, minuteur, calculateur |
+| `data.js`               | Tout le contenu des programmes |
+| `check.js`              | Vérifs : `node check.js` |
+| `sw.js`                 | Cache hors-ligne (service worker) |
+| `manifest.webmanifest`  | Installation sur l'écran d'accueil |
+| `icon-*.png`            | Icônes de l'app |
 
 ## Ajouter ou modifier un programme
 
@@ -62,6 +71,12 @@ Deux détails :
   temps de repos. « 3 à 4 » est raccourci en « 3-4 » à l'écran.
 - `items` sert aux programmes qui progressent dans le temps : une carte par
   bloc de deux semaines, et dans la carte, une ligne par séance du bloc.
+- `rest` alimente le minuteur : la première durée trouvée est prise, donc
+  « 2’30 à 3’ » lance 2 min 30. Un repos sans durée (« enchaîné ») n'est pas
+  cliquable.
+- `tool: 'diete'` remplace les séances par le calculateur de diète. Un seul
+  outil existe aujourd'hui ; en ajouter un demande de le brancher dans
+  `renderProgram()`.
 - `targets` affiche un petit tableau Lui / Elle sous le détail : charges, temps
   ou objectifs de fin de phase, uniquement là où les deux diffèrent. Les
   valeurs sont des points de départ à calibrer (2 reps en réserve).

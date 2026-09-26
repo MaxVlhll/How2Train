@@ -2,9 +2,13 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>How2Train</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>🏋️</text></svg>">
+<meta name="theme-color" content="#0c0f14">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <style>
   :root {
     --bg: #0c0f14;
@@ -12,7 +16,9 @@
     --card-hi: #1b2230;
     --line: #242d3a;
     --txt: #e8edf5;
+    --soft: #c3cdda;
     --dim: #8c99ab;
+    --faint: #55606f;
     --force: #f5a524;
     --course: #38bdf8;
     --hybride: #f43f5e;
@@ -26,7 +32,7 @@
     background: var(--bg);
     color: var(--txt);
     font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    padding: 0 16px 64px;
+    padding: 0 16px 96px;
   }
   .wrap { max-width: 720px; margin: 0 auto; }
 
@@ -79,10 +85,19 @@
   .pick:hover { background: var(--card-hi); }
   .pick-name { font-size: 18px; font-weight: 600; }
   .pick-meta { color: var(--dim); font-size: 14px; }
+  .chev { flex: none; color: var(--faint); font-size: 20px; }
+
+  /* Accueil : une carte par section, rien d'autre. */
+  .sect { padding: 22px 20px; margin-bottom: 10px; }
+  .sect .pick-name {
+    font-size: 15px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
 
   .title { margin: 0 0 6px; font-size: 27px; line-height: 1.2; font-weight: 700; }
   .meta { color: var(--dim); font-size: 14px; }
-  .focus { margin: 16px 0 28px; color: #c3cdda; }
+  .focus { margin: 16px 0 28px; color: var(--soft); }
 
   details.s {
     margin-bottom: 8px;
@@ -106,7 +121,7 @@
   .s-title { margin-top: 3px; font-size: 17px; font-weight: 600; }
   .detail {
     padding: 14px 18px 16px;
-    color: #c3cdda;
+    color: var(--soft);
     font-size: 15px;
     border-top: 1px solid var(--line);
   }
@@ -128,7 +143,20 @@
     font-variant-numeric: tabular-nums;
     text-align: right;
   }
-  .ex-rest { display: block; color: #55606f; }
+  .ex-rest { display: block; color: var(--faint); }
+  /* Le repos est cliquable quand il contient une durée : il lance le minuteur. */
+  button.ex-rest {
+    padding: 2px 0 0;
+    background: none;
+    border: 0;
+    font: inherit;
+    font-size: 13px;
+    color: var(--accent, var(--dim));
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 3px;
+  }
 
   .items { padding: 0 18px 4px; }
   .item { padding: 11px 0; border-top: 1px solid var(--line); }
@@ -139,7 +167,7 @@
     text-transform: uppercase;
     color: var(--accent, var(--dim));
   }
-  .item-text { color: #c3cdda; font-size: 15px; }
+  .item-text { color: var(--soft); font-size: 15px; }
 
   .targets { padding: 0 18px 16px; }
   .t-row {
@@ -158,7 +186,7 @@
     text-transform: uppercase;
     color: var(--dim);
   }
-  .t-ex { color: #c3cdda; }
+  .t-ex { color: var(--soft); }
   .t-v { color: var(--txt); font-variant-numeric: tabular-nums; }
   .t-note { margin-top: 10px; color: var(--dim); font-size: 13px; }
 
@@ -170,20 +198,105 @@
     text-transform: uppercase;
     color: var(--dim);
   }
-  .rules ul { margin: 0; padding-left: 20px; color: #c3cdda; font-size: 15px; }
+  .rules ul { margin: 0; padding-left: 20px; color: var(--soft); font-size: 15px; }
   .rules li { margin-bottom: 8px; }
 
-  footer { margin-top: 40px; color: #55606f; font-size: 13px; }
+  /* Minuteur de repos, barre fixe en bas d'écran. */
+  #timer {
+    position: fixed;
+    left: 50%;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 13px 20px;
+    background: var(--card-hi);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.55);
+    color: var(--txt);
+    font: inherit;
+    cursor: pointer;
+  }
+  #timer[hidden] { display: none; }
+  #timer .tm {
+    font-size: 22px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  #timer .tl { color: var(--dim); font-size: 13px; }
+  #timer.fini { border-color: var(--force); color: var(--force); }
+  #timer.fini .tl { color: var(--force); }
+
+  /* Calculateur de diète. */
+  .form { margin-bottom: 26px; }
+  .champ { margin-bottom: 14px; }
+  .champ label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .champ input, .champ select {
+    width: 100%;
+    padding: 12px 14px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--txt);
+    font: inherit;
+  }
+  .duo { display: flex; gap: 8px; }
+  .duo button {
+    flex: 1;
+    padding: 12px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--dim);
+    font: inherit;
+    cursor: pointer;
+  }
+  .duo button[aria-pressed="true"] {
+    background: var(--card-hi);
+    border-color: var(--force);
+    color: var(--force);
+  }
+  .res {
+    margin-bottom: 8px;
+    padding: 16px 18px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent, var(--repos));
+    border-radius: 12px;
+  }
+  .res-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .res-nom { font-size: 17px; font-weight: 600; }
+  .res-kcal {
+    flex: none;
+    color: var(--accent, var(--txt));
+    font-size: 17px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .res-sous { margin-top: 3px; color: var(--dim); font-size: 13px; }
+  .res-macros { margin-top: 10px; color: var(--soft); font-size: 14px; font-variant-numeric: tabular-nums; }
+
+  footer { margin-top: 40px; color: var(--faint); font-size: 13px; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <button class="back" id="back" hidden>← tous les trainings</button>
+    <button class="back" id="back" hidden>←</button>
     <h1>How2Train</h1>
   </header>
   <main id="app"></main>
 </div>
+<button id="timer" hidden><span class="tm">0:00</span><span class="tl">repos</span></button>
 
 <script src="data.js"></script>
 <script>
@@ -191,14 +304,17 @@
   var app = document.getElementById('app');
   var back = document.getElementById('back');
   var KEY = 'how2train.last';
+  var KEY_DIETE = 'how2train.diete';
+
+  // Ce que contient chaque section, pour l'accueil.
+  var UNITES = { 'Prépa Spartan 2027': ['phase', 'phases'], 'Annexes': ['fiche', 'fiches'] };
 
   // Couleur d'accent déduite du type de séance.
   function accent(type) {
     var t = type.toLowerCase();
     if (t.indexOf('hybride') > -1) return 'var(--hybride)';
     if (t.indexOf('lower') > -1 || t.indexOf('legs') > -1) return 'var(--legs)';
-    if (t.indexOf('pull') > -1) return 'var(--pull)';
-    if (t.indexOf('gymnastique') > -1) return 'var(--pull)';
+    if (t.indexOf('pull') > -1 || t.indexOf('gymnastique') > -1) return 'var(--pull)';
     if (t.indexOf('muscu') > -1 || t.indexOf('porté') > -1 || t.indexOf('full body') > -1 ||
         t.indexOf('upper') > -1 || t.indexOf('push') > -1 || t.indexOf('force') > -1 ||
         t.indexOf('poids du corps') > -1) return 'var(--force)';
@@ -218,6 +334,88 @@
     return ' · ' + p.start.split('-').reverse().join('/') + ' → ' + p.end.split('-').reverse().join('/');
   }
 
+  function groupes() {
+    var g = [];
+    window.PROGRAMS.forEach(function (p) { if (g.indexOf(p.group) === -1) g.push(p.group); });
+    return g;
+  }
+
+  function duGroupe(g) {
+    return window.PROGRAMS.filter(function (p) { return p.group === g; });
+  }
+
+  // ----- Minuteur de repos ----------------------------------------------------
+
+  var timerEl = document.getElementById('timer');
+  var tick = null;
+  var cacher = null;
+  var audio = null;
+
+  // « 2’30 à 3’ » → 150 s · « 1’30 » → 90 s · « enchaîné » → 0 (pas de minuteur).
+  function secondes(repos) {
+    var m = /(\d+)\s*[’']\s*(\d+)?/.exec(repos);
+    if (!m) return 0;
+    return parseInt(m[1], 10) * 60 + (m[2] ? parseInt(m[2], 10) : 0);
+  }
+
+  function mmss(s) {
+    return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+  }
+
+  function bip() {
+    try {
+      audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+      [0, 0.28].forEach(function (retard) {
+        var o = audio.createOscillator();
+        var g = audio.createGain();
+        o.frequency.value = 880;
+        g.gain.setValueAtTime(0.0001, audio.currentTime + retard);
+        g.gain.exponentialRampToValueAtTime(0.25, audio.currentTime + retard + 0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + retard + 0.2);
+        o.connect(g).connect(audio.destination);
+        o.start(audio.currentTime + retard);
+        o.stop(audio.currentTime + retard + 0.22);
+      });
+    } catch (e) {}
+    if (navigator.vibrate) navigator.vibrate([120, 80, 120]);
+  }
+
+  function stopTimer() {
+    clearInterval(tick);
+    clearTimeout(cacher);
+    tick = null;
+    timerEl.hidden = true;
+    timerEl.classList.remove('fini');
+  }
+
+  // Compte à rebours calé sur l'horloge : rester juste même si l'onglet dort.
+  function lancerTimer(total, nom) {
+    stopTimer();
+    var fin = Date.now() + total * 1000;
+    timerEl.hidden = false;
+    timerEl.querySelector('.tl').textContent = nom;
+    var afficher = function () {
+      var reste = Math.round((fin - Date.now()) / 1000);
+      if (reste <= 0) {
+        clearInterval(tick);
+        tick = null;
+        timerEl.querySelector('.tm').textContent = '0:00';
+        timerEl.querySelector('.tl').textContent = 'go';
+        timerEl.classList.add('fini');
+        bip();
+        cacher = setTimeout(stopTimer, 6000);
+        return;
+      }
+      timerEl.querySelector('.tm').textContent = mmss(reste);
+    };
+    afficher();
+    tick = setInterval(afficher, 250);
+  }
+
+  timerEl.onclick = stopTimer;
+
+  // ----- Rendu des séances ----------------------------------------------------
+
   // Séances d'un bloc (programmes de course) : un intitulé, puis son contenu.
   function items(list) {
     var box = el('div', 'items');
@@ -231,15 +429,23 @@
   }
 
   // Liste d'exercices : nom à gauche, séries × répétitions et repos à droite.
+  // Le repos lance le minuteur quand il exprime une durée.
   function exercises(list) {
     var box = el('div', 'ex');
+    var court = function (v) { return v.replace(' à ', '-'); };
     list.forEach(function (x) {
       var r = el('div', 'ex-row');
       r.appendChild(el('div', 'ex-name', x.name));
-      // « 3 à 4 » → « 3-4 » : plus court à lire entre deux séries.
-      var court = function (v) { return v.replace(' à ', '-'); };
       var n = el('div', 'ex-num', court(x.sets) + ' × ' + court(x.reps));
-      n.appendChild(el('span', 'ex-rest', 'repos ' + x.rest));
+      var s = secondes(x.rest);
+      if (s > 0) {
+        var b = el('button', 'ex-rest', 'repos ' + x.rest);
+        b.title = 'Lancer le minuteur (' + mmss(s) + ')';
+        b.onclick = function () { lancerTimer(s, x.name); };
+        n.appendChild(b);
+      } else {
+        n.appendChild(el('span', 'ex-rest', 'repos ' + x.rest));
+      }
       r.appendChild(n);
       box.appendChild(r);
     });
@@ -265,37 +471,207 @@
     return box;
   }
 
-  function renderCatalogue() {
+  // ----- Calculateur de diète -------------------------------------------------
+
+  // Mifflin-St Jeor : l'équation de référence pour le métabolisme de base.
+  function mifflin(sexe, poids, taille, age) {
+    return 10 * poids + 6.25 * taille - 5 * age + (sexe === 'h' ? 5 : -161);
+  }
+
+  var ACTIVITES = [
+    { v: 1.2, nom: 'Sédentaire — bureau, pas de sport' },
+    { v: 1.375, nom: 'Peu actif — 1 à 3 séances/sem' },
+    { v: 1.55, nom: 'Actif — 3 à 5 séances/sem' },
+    { v: 1.725, nom: 'Très actif — 6 à 7 séances/sem' },
+    { v: 1.9, nom: 'Athlète — 2 séances/jour ou métier physique' }
+  ];
+
+  function dieteTool() {
+    var box = el('div');
+    var form = el('div', 'form');
+    var res = el('div');
+
+    var etat = { sexe: 'h', age: 30, taille: 175, poids: 75, act: 1.55 };
+    try {
+      var sauve = JSON.parse(localStorage.getItem(KEY_DIETE) || 'null');
+      if (sauve) etat = sauve;
+    } catch (e) {}
+
+    function champ(label, noeud) {
+      var c = el('div', 'champ');
+      c.appendChild(el('label', null, label));
+      c.appendChild(noeud);
+      return c;
+    }
+
+    // Sexe : deux boutons, l'équation change de constante.
+    var duo = el('div', 'duo');
+    [['h', 'Homme'], ['f', 'Femme']].forEach(function (o) {
+      var b = el('button', null, o[1]);
+      b.setAttribute('aria-pressed', etat.sexe === o[0]);
+      b.onclick = function () {
+        etat.sexe = o[0];
+        [].forEach.call(duo.children, function (x, i) {
+          x.setAttribute('aria-pressed', (i === 0 ? 'h' : 'f') === etat.sexe);
+        });
+        calculer();
+      };
+      duo.appendChild(b);
+    });
+    form.appendChild(champ('Sexe', duo));
+
+    function nombre(cle, min, max) {
+      var i = el('input');
+      i.type = 'number';
+      i.inputMode = 'numeric';
+      i.min = min;
+      i.max = max;
+      i.value = etat[cle];
+      i.oninput = function () {
+        etat[cle] = parseFloat(i.value) || 0;
+        calculer();
+      };
+      return i;
+    }
+    form.appendChild(champ('Âge', nombre('age', 14, 100)));
+    form.appendChild(champ('Taille (cm)', nombre('taille', 120, 230)));
+    form.appendChild(champ('Poids (kg)', nombre('poids', 35, 250)));
+
+    var sel = el('select');
+    ACTIVITES.forEach(function (a) {
+      var o = el('option', null, a.nom);
+      o.value = a.v;
+      if (a.v === etat.act) o.selected = true;
+      sel.appendChild(o);
+    });
+    sel.onchange = function () {
+      etat.act = parseFloat(sel.value);
+      calculer();
+    };
+    form.appendChild(champ('Activité', sel));
+
+    function ligne(nom, kcal, sous, macros, couleur) {
+      var d = el('div', 'res');
+      d.style.setProperty('--accent', couleur);
+      var head = el('div', 'res-head');
+      head.appendChild(el('div', 'res-nom', nom));
+      head.appendChild(el('div', 'res-kcal', kcal));
+      d.appendChild(head);
+      d.appendChild(el('div', 'res-sous', sous));
+      if (macros) d.appendChild(el('div', 'res-macros', macros));
+      return d;
+    }
+
+    // Protéines et lipides au poids de corps, les glucides prennent le reste.
+    function macros(kcal, poids, gProt, gLip) {
+      var prot = Math.round(gProt * poids);
+      var lip = Math.round(gLip * poids);
+      var gluc = Math.max(0, Math.round((kcal - prot * 4 - lip * 9) / 4));
+      return prot + ' g protéines · ' + lip + ' g lipides · ' + gluc + ' g glucides';
+    }
+
+    function calculer() {
+      try { localStorage.setItem(KEY_DIETE, JSON.stringify(etat)); } catch (e) {}
+      res.innerHTML = '';
+      if (!etat.poids || !etat.taille || !etat.age) {
+        res.appendChild(el('div', 'res-sous', 'Remplis les champs pour voir le calcul.'));
+        return;
+      }
+      var bmr = Math.round(mifflin(etat.sexe, etat.poids, etat.taille, etat.age));
+      var tdee = Math.round(bmr * etat.act);
+      var masseBas = Math.round(tdee * 1.1);
+      var masseHaut = Math.round(tdee * 1.15);
+      var secheBas = Math.round(tdee * 0.8);
+      var secheHaut = Math.round(tdee * 0.85);
+
+      res.appendChild(ligne(
+        'Métabolisme de base',
+        bmr + ' kcal',
+        'Ce que ton corps brûle au repos complet, sans rien faire de la journée.',
+        null, 'var(--repos)'
+      ));
+      res.appendChild(ligne(
+        'Maintenance',
+        tdee + ' kcal',
+        'Métabolisme de base × ' + etat.act + ', ton niveau d’activité. Le poids reste stable.',
+        macros(tdee, etat.poids, 2, 1), 'var(--course)'
+      ));
+      res.appendChild(ligne(
+        'Prise de masse',
+        masseBas + ' à ' + masseHaut + ' kcal',
+        '+10 à 15 %. Viser +0,25 à 0,5 % de poids de corps par semaine — au-delà, le surplus part en gras.',
+        macros(masseHaut, etat.poids, 1.8, 1), 'var(--force)'
+      ));
+      res.appendChild(ligne(
+        'Sèche',
+        secheBas + ' à ' + secheHaut + ' kcal',
+        '−15 à 20 %. Perte visée 0,5 à 1 % du poids de corps par semaine, protéines majorées.',
+        macros(secheBas, etat.poids, 2.2, 0.9), 'var(--hybride)'
+      ));
+      res.appendChild(el('div', 't-note', 'Équation de Mifflin-St Jeor, juste à ±10 %. Ces chiffres sont un point de départ : c’est la balance sur deux semaines qui tranche.'));
+    }
+
+    box.appendChild(form);
+    box.appendChild(res);
+    calculer();
+    return box;
+  }
+
+  // ----- Écrans ---------------------------------------------------------------
+
+  // Accueil : une carte par section, rien d'autre.
+  function renderAccueil() {
     document.title = 'How2Train';
     back.hidden = true;
     app.innerHTML = '';
-    var groups = [];
-    window.PROGRAMS.forEach(function (p) {
-      if (groups.indexOf(p.group) === -1) groups.push(p.group);
+    groupes().forEach(function (g) {
+      var n = duGroupe(g).length;
+      var mot = UNITES[g] || ['programme', 'programmes'];
+      var b = el('button', 'pick sect');
+      var left = el('div');
+      left.appendChild(el('div', 'pick-name', g));
+      left.appendChild(el('div', 'pick-meta', n + ' ' + (n > 1 ? mot[1] : mot[0])));
+      b.appendChild(left);
+      b.appendChild(el('span', 'chev', '›'));
+      b.onclick = function () { go({ g: g }); };
+      app.appendChild(b);
     });
-    groups.forEach(function (g) {
-      app.appendChild(el('div', 'group-name', g));
-      window.PROGRAMS.filter(function (p) { return p.group === g; }).forEach(function (p) {
-        var b = el('button', 'pick');
-        var left = el('div');
-        left.appendChild(el('div', 'pick-name', p.name));
-        left.appendChild(el('div', 'pick-meta', p.meta + dateRange(p)));
-        b.appendChild(left);
-        b.onclick = function () { go(p.id); };
-        app.appendChild(b);
-      });
+  }
+
+  // Section : la liste de ses programmes.
+  function renderSection(g) {
+    document.title = g + ' — How2Train';
+    back.hidden = false;
+    back.textContent = '← toutes les sections';
+    app.innerHTML = '';
+    app.appendChild(el('h2', 'title', g));
+    var n = duGroupe(g).length;
+    var mot = UNITES[g] || ['programme', 'programmes'];
+    app.appendChild(el('div', 'group-name', n + ' ' + (n > 1 ? mot[1] : mot[0])));
+    duGroupe(g).forEach(function (p) {
+      var b = el('button', 'pick');
+      var left = el('div');
+      left.appendChild(el('div', 'pick-name', p.name));
+      left.appendChild(el('div', 'pick-meta', p.meta + dateRange(p)));
+      b.appendChild(left);
+      b.appendChild(el('span', 'chev', '›'));
+      b.onclick = function () { go({ p: p.id }); };
+      app.appendChild(b);
     });
   }
 
   function renderProgram(p) {
     document.title = p.name + ' — How2Train';
     back.hidden = false;
+    back.textContent = '← ' + p.group;
     app.innerHTML = '';
     app.appendChild(el('h2', 'title', p.name));
     app.appendChild(el('div', 'meta', p.meta + dateRange(p)));
     app.appendChild(el('p', 'focus', p.focus));
 
-    p.sessions.forEach(function (s) {
+    if (p.tool === 'diete') app.appendChild(dieteTool());
+
+    (p.sessions || []).forEach(function (s) {
       var d = el('details', 's');
       d.style.setProperty('--accent', accent(s.type));
       var sum = el('summary');
@@ -314,7 +690,7 @@
 
     if (p.rules && p.rules.length) {
       var box = el('section', 'rules');
-      box.appendChild(el('h2', null, 'Règles de la phase'));
+      box.appendChild(el('h2', null, p.tool ? 'À savoir' : 'Règles du programme'));
       var ul = el('ul');
       p.rules.forEach(function (r) { ul.appendChild(el('li', null, r)); });
       box.appendChild(ul);
@@ -324,37 +700,62 @@
     app.appendChild(el('footer', null, 'Guide, pas planning : une séance manquée ne se rattrape pas.'));
   }
 
+  // ----- Navigation -----------------------------------------------------------
+
   function find(id) {
     return window.PROGRAMS.filter(function (p) { return p.id === id; })[0];
   }
 
-  function render(id) {
-    var p = id && find(id);
-    if (p) renderProgram(p); else renderCatalogue();
+  function render(vue) {
+    stopTimer();
+    var p = vue.p && find(vue.p);
+    if (p) renderProgram(p);
+    else if (vue.g && groupes().indexOf(vue.g) > -1) renderSection(vue.g);
+    else renderAccueil();
     window.scrollTo(0, 0);
   }
 
-  function go(id) {
-    history.pushState({ id: id }, '', id ? '?p=' + id : location.pathname);
+  function url(vue) {
+    if (vue.p) return '?p=' + encodeURIComponent(vue.p);
+    if (vue.g) return '?g=' + encodeURIComponent(vue.g);
+    return location.pathname;
+  }
+
+  function go(vue) {
+    history.pushState(vue, '', url(vue));
     try {
-      if (id) localStorage.setItem(KEY, id); else localStorage.removeItem(KEY);
+      if (vue.p) localStorage.setItem(KEY, vue.p); else localStorage.removeItem(KEY);
     } catch (e) {}
-    render(id);
+    render(vue);
   }
 
-  function currentId() {
-    return new URLSearchParams(location.search).get('p');
+  function vueCourante() {
+    var q = new URLSearchParams(location.search);
+    return { p: q.get('p'), g: q.get('g') };
   }
 
-  back.onclick = function () { go(null); };
-  window.onpopstate = function () { render(currentId()); };
+  // Retour : un programme remonte à sa section, une section remonte à l'accueil.
+  back.onclick = function () {
+    var vue = vueCourante();
+    var p = vue.p && find(vue.p);
+    go(p ? { g: p.group } : {});
+  };
+  window.onpopstate = function () { render(vueCourante()); };
 
-  var start = currentId();
-  if (!start) {
-    try { start = localStorage.getItem(KEY); } catch (e) {}
-    if (start && find(start)) history.replaceState({ id: start }, '', '?p=' + start);
+  var depart = vueCourante();
+  if (!depart.p && !depart.g) {
+    try { depart.p = localStorage.getItem(KEY); } catch (e) {}
+    if (depart.p && find(depart.p)) history.replaceState(depart, '', url(depart));
+    else depart = {};
   }
-  render(start);
+  render(depart);
+
+  // Hors-ligne : le service worker garde l'appli utilisable sans réseau.
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () {});
+    });
+  }
 })();
 </script>
 </body>

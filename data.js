@@ -1024,6 +1024,23 @@ window.PROGRAMS = [
     ]
   },
   {
+    id: 'diete',
+    group: 'Annexes',
+    name: 'Calcul de la diète',
+    meta: 'métabolisme de base · maintenance · masse · sèche',
+    focus: 'Calcule ton métabolisme de base avec l’équation de Mifflin-St Jeor, ta dépense totale selon ton activité, puis les calories et les macros pour maintenir, prendre de la masse ou sécher.',
+    tool: 'diete',
+    sessions: [],
+    rules: [
+      'Un calcul reste une estimation : l’équation tombe à ±10 % de la dépense réelle. Le vrai réglage se fait à la balance, sur la moyenne des 7 derniers jours, après deux à trois semaines.',
+      'Prise de masse : +10 à 15 % suffisent. Au-delà, le surplus part en gras, pas en muscle. Viser +0,25 à 0,5 % de poids de corps par semaine.',
+      'Sèche : −15 à 20 %, pas plus. Perte visée 0,5 à 1 % du poids de corps par semaine — plus vite, c’est du muscle qui part.',
+      'Protéines 1,8 à 2,2 g/kg, plutôt le haut de la fourchette en déficit : c’est ce qui protège la masse musculaire.',
+      'Lipides jamais sous 0,8 g/kg : en dessous, hormones et récupération trinquent. Les glucides prennent le reste, et ce sont eux qui alimentent les séances dures.',
+      'Le poids ne descend pas en ligne droite : sel, hydratation, cycle et glycogène font varier de 1 à 2 kg d’un jour à l’autre. Seule la tendance sur deux semaines compte.'
+    ]
+  },
+  {
     id: 'mobilite',
     group: 'Annexes',
     name: 'Mobilité & préventif genou',
