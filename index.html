@@ -570,10 +570,12 @@
       return d;
     }
 
-    // Protéines et lipides au poids de corps, les glucides prennent le reste.
-    function macros(kcal, poids, gProt, gLip) {
-      var prot = Math.round(gProt * poids);
-      var lip = Math.round(gLip * poids);
+    // Protéines sur la masse maigre si le % de gras est connu, sinon au poids de corps.
+    // Lipides toujours au poids de corps (plancher hormonal), les glucides prennent le reste.
+    function macros(kcal, gProt, gProtMaigre, gLip) {
+      var avecMg = etat.mg >= 3 && etat.mg <= 60;
+      var prot = Math.round(avecMg ? gProtMaigre * etat.poids * (1 - etat.mg / 100) : gProt * etat.poids);
+      var lip = Math.round(gLip * etat.poids);
       var gluc = Math.max(0, Math.round((kcal - prot * 4 - lip * 9) / 4));
       return prot + ' g protéines · ' + lip + ' g lipides · ' + gluc + ' g glucides';
     }
@@ -606,19 +608,19 @@
         'Maintenance',
         tdee + ' kcal',
         'Métabolisme de base × ' + etat.act + ', ton niveau d’activité. Le poids reste stable.',
-        macros(tdee, etat.poids, 2, 1), 'var(--course)'
+        macros(tdee, 2, 2.4, 1), 'var(--course)'
       ));
       res.appendChild(ligne(
         'Prise de masse',
         masseBas + ' à ' + masseHaut + ' kcal',
         '+10 à 15 %. Viser +0,25 à 0,5 % de poids de corps par semaine — au-delà, le surplus part en gras.',
-        macros(masseHaut, etat.poids, 1.8, 1), 'var(--force)'
+        macros(masseHaut, 1.8, 2.4, 1), 'var(--force)'
       ));
       res.appendChild(ligne(
         'Sèche',
         secheBas + ' à ' + secheHaut + ' kcal',
         '−15 à 20 %. Perte visée 0,5 à 1 % du poids de corps par semaine, protéines majorées.',
-        macros(secheBas, etat.poids, 2.2, 0.9), 'var(--hybride)'
+        macros(secheBas, 2.2, 2.7, 0.9), 'var(--hybride)'
       ));
       res.appendChild(el('div', 't-note', (avecMg
         ? 'Équation de Katch-McArdle (masse maigre) : aussi juste que ta mesure de masse grasse.'
