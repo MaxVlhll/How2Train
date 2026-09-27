@@ -478,6 +478,11 @@
     return 10 * poids + 6.25 * taille - 5 * age + (sexe === 'h' ? 5 : -161);
   }
 
+  // Katch-McArdle : basée sur la masse maigre, plus juste quand le % de gras est connu.
+  function katch(poids, mg) {
+    return 370 + 21.6 * poids * (1 - mg / 100);
+  }
+
   var ACTIVITES = [
     { v: 1.2, nom: 'Sédentaire — bureau, pas de sport' },
     { v: 1.375, nom: 'Peu actif — 1 à 3 séances/sem' },
@@ -526,7 +531,7 @@
       i.inputMode = 'numeric';
       i.min = min;
       i.max = max;
-      i.value = etat[cle];
+      i.value = etat[cle] || '';
       i.oninput = function () {
         etat[cle] = parseFloat(i.value) || 0;
         calculer();
@@ -536,6 +541,9 @@
     form.appendChild(champ('Âge', nombre('age', 14, 100)));
     form.appendChild(champ('Taille (cm)', nombre('taille', 120, 230)));
     form.appendChild(champ('Poids (kg)', nombre('poids', 35, 250)));
+    var mg = nombre('mg', 3, 60);
+    mg.placeholder = 'Optionnel';
+    form.appendChild(champ('Masse grasse (%)', mg));
 
     var sel = el('select');
     ACTIVITES.forEach(function (a) {
@@ -577,7 +585,10 @@
         res.appendChild(el('div', 'res-sous', 'Remplis les champs pour voir le calcul.'));
         return;
       }
-      var bmr = Math.round(mifflin(etat.sexe, etat.poids, etat.taille, etat.age));
+      var avecMg = etat.mg >= 3 && etat.mg <= 60;
+      var bmr = Math.round(avecMg
+        ? katch(etat.poids, etat.mg)
+        : mifflin(etat.sexe, etat.poids, etat.taille, etat.age));
       var tdee = Math.round(bmr * etat.act);
       var masseBas = Math.round(tdee * 1.1);
       var masseHaut = Math.round(tdee * 1.15);
@@ -587,7 +598,8 @@
       res.appendChild(ligne(
         'Métabolisme de base',
         bmr + ' kcal',
-        'Ce que ton corps brûle au repos complet, sans rien faire de la journée.',
+        'Ce que ton corps brûle au repos complet, sans rien faire de la journée.'
+          + (avecMg ? ' Calculé sur ta masse maigre : ' + Math.round(etat.poids * (1 - etat.mg / 100)) + ' kg.' : ''),
         null, 'var(--repos)'
       ));
       res.appendChild(ligne(
@@ -608,7 +620,9 @@
         '−15 à 20 %. Perte visée 0,5 à 1 % du poids de corps par semaine, protéines majorées.',
         macros(secheBas, etat.poids, 2.2, 0.9), 'var(--hybride)'
       ));
-      res.appendChild(el('div', 't-note', 'Équation de Mifflin-St Jeor, juste à ±10 %. Ces chiffres sont un point de départ : c’est la balance sur deux semaines qui tranche.'));
+      res.appendChild(el('div', 't-note', (avecMg
+        ? 'Équation de Katch-McArdle (masse maigre) : aussi juste que ta mesure de masse grasse.'
+        : 'Équation de Mifflin-St Jeor, juste à ±10 %. Renseigne ta masse grasse pour affiner.') + ' Ces chiffres sont un point de départ : c’est la balance sur deux semaines qui tranche.'));
     }
 
     box.appendChild(form);

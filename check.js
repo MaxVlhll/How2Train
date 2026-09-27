@@ -125,6 +125,9 @@ const mifflin = (sexe, poids, taille, age) =>
 assert.strictEqual(mifflin('h', 80, 180, 30), 1780, 'homme 80 kg / 180 cm / 30 ans');
 assert.strictEqual(mifflin('f', 60, 165, 30), 1320.25, 'femme 60 kg / 165 cm / 30 ans');
 assert(mifflin('h', 80, 180, 30) > mifflin('f', 80, 180, 30), 'la constante homme est plus haute');
+const katch = (poids, mg) => 370 + 21.6 * poids * (1 - mg / 100);
+assert.strictEqual(Math.round(katch(80, 15)), 1839, '80 kg à 15 % = 68 kg de masse maigre');
+assert(html.includes('370 + 21.6 * poids * (1 - mg / 100)'), 'Katch-McArdle a divergé de index.html');
 
 // Hors-ligne : les fichiers de l'app installable existent et se tiennent.
 const manifeste = JSON.parse(fs.readFileSync(path.join(__dirname, 'manifest.webmanifest'), 'utf8'));
